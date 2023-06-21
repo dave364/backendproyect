@@ -1,0 +1,38 @@
+<div>
+    <div class="formConteiner">    
+        <h1>Ingresar Nuevos Productos</h1>
+        <form id="formulario" action="">
+            <div>
+                <label for="name">Titulo :</label>
+                <input type="text" name="title" id="">
+            </div>
+        
+            <div>
+                <label for="price">Precio :</label>
+                <input type="text" name="price" id="">
+            </div>
+
+            <div>
+                <label for="stock">Stock :</label>
+                <input type="text" name="stock" id="">
+            </div>
+
+            <div>
+                <label for="category">Category :</label>
+                <input type="text" name="category" id="">
+            </div>      
+
+            <input class="botonForm" type="submit">
+        </form>
+        <span class="errorForm">Alguno de los campos no fue ingresado !</span>
+    </div>
+    <h1>Productos Actuales</h1>
+    <div id="mostrarProductos">
+
+    </div>
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
