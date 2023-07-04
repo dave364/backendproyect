@@ -3,7 +3,9 @@ import { getProductsCart } from "./GetProductsCart.js";
 import { addProductCart } from "./AddProductCart.js";
 import { addProduct } from "./AddProduct.js";
 import { putProduct } from "./PutProduct.js";
-import { deleteProduct } from "./DeleteProduct.js";
+import { deleteProductFromCart } from "./deleteProductFromCart.js";
+import { deleteAllProductsFromCart } from "./deleteAllProductsCart.js";
+
 
 export {
   getProducts,
@@ -11,5 +13,6 @@ export {
   getProductsCart,
   addProductCart,
   putProduct,
-  deleteProduct
+  deleteProductFromCart,
+  deleteAllProductsFromCart,
 };

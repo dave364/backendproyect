@@ -2,8 +2,8 @@ import Cart from "../model/Cart.js";
 
 export const putProduct = async (req, res) => {
   const { productId } = req.params;
-  const { query } = req.query;
   const body = req.body;
+  const { query } = body.query;
 
   /* Buscamos el producto en el carrito */
   const productBuscado = await Cart.findById(productId);

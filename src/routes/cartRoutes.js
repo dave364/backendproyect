@@ -1,14 +1,9 @@
-import express from "express";
-import { getCarts, getCart, createCart, updateCart, deleteCartProduct, updateCartItem, deleteCart } from "../controllers/cartController.js";
+import express from 'express';
+import * as viewsController from '../controllers/viewsController';
 
-const router = express.Router();
+const CartRouter = express.Router();
 
-router.get("/", getCarts);
-router.get("/:cid", getCart);
-router.post("/", createCart);
-router.put("/:cid", updateCart);
-router.delete("/:cid/products/:pid", deleteCartProduct);
-router.put("/:cid/products/:pid", updateCartItem);
-router.delete("/:cid", deleteCart);
+// Ruta para visualizar un carrito específico
+router.get('/carts/:cid', viewsController.getCart);
 
-export default router;
+export default CartRouter;

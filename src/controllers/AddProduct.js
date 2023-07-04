@@ -1,11 +1,12 @@
-import Product from "../model/Product.js";
+import { productModel } from "../model/Product.js";
+
 
 export const addProduct = async (req, res) => {
   const { name, category, price } = req.body;
 
   try {
     // Crear una instancia del modelo de Producto con los datos proporcionados
-    const newProduct = new Product({ name, category, price });
+    const newProduct = new productModel({ name, category, price });
 
     // Guardar el nuevo producto en la base de datos
     const savedProduct = await newProduct.save();

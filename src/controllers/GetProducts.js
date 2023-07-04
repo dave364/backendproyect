@@ -1,7 +1,35 @@
-import Product from "../model/Product.js";
+import { connectToDatabase, productModel } from "../model/Product.js";
+
+// Conexión a la base de datos
+connectToDatabase();
 
 export const getProducts = async (req, res) => {
-  const { limit = 10, page = 1, sort, query } = req.query;
+  const { page, orderBy } = req.params;
+  try {
+    const order = orderBy == 0 ? {} : { price: orderBy };
+    const options = {
+      page: page,
+      limit: 4,
+      sort: order
+    };
+    console.log(options)
+    const products = await productModel.paginate({}, options);
+    console.log(products);
+    return     res.json({
+      status: "success",
+      payload: products,
+    });
+  }
+    catch (error) {
+    console.error("Error al leer los productos:", error);
+    throw error;
+  }
+ 
+
+
+
+
+  /* const { limit = 5, page = 1, sort, query } = req.query;
 
   // Construir el objeto de filtro
   const filter = {};
@@ -55,6 +83,6 @@ export const getProducts = async (req, res) => {
       nextLink,
     });
   } catch (error) {
-    res.status(500).json({ status: "error", message: "Error al obtener los productos" });
-  }
+    res.status(500).json({ status: 'error', message: 'Error al obtener los productos' });
+  }*/
 };

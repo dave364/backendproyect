@@ -1,5 +1,5 @@
 import Cart from "../model/Cart.js";
-import Product from "../model/Product.js";
+import { productModel } from "../model/Product.js";
 
 export const addProductCart = async (req, res) => {
   const { cid, pid } = req.params;
@@ -12,7 +12,7 @@ export const addProductCart = async (req, res) => {
     }
 
     // Verificar si el producto existe
-    const product = await Product.findById(pid);
+    const product = await productModel.findById(pid);
     if (!product) {
       return res.status(404).json({ mensaje: "El producto no existe" });
     }

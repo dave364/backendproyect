@@ -1,0 +1,16 @@
+<h1>Carrito</h1>
+
+<% if (cart.products.length === 0) { %>
+  <p>No hay productos en el carrito</p>
+<% } else { %>
+  <ul>
+    <% cart.products.forEach((item) => { %>
+      <li>
+        <h2><%= item.product.name %></h2>
+        <p>Cantidad: <%= item.quantity %></p>
+        <p>Precio unitario: <%= item.product.price %></p>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
