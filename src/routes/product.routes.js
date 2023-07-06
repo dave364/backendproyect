@@ -15,7 +15,7 @@ const ProductRouter = Router();
 ProductRouter.get("/", getProducts);
 
 // Obtener un producto por su ID
-ProductRouter.get("/cart", getProductsCart);
+ProductRouter.get("/carts", getProductsCart);
 
 // Agregar un nuevo producto
 ProductRouter.post("/", addProduct);

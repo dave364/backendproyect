@@ -1,29 +1,31 @@
-import { connectToDatabase, productModel } from "../model/Product.js";
-
-// Conexión a la base de datos
-connectToDatabase();
+import { productModel } from "../model/Product.js";
 
 export const getProducts = async (req, res) => {
-  const { page, orderBy } = req.params;
+
   try {
+    /*console.log("holaa", req);*/
+
+    const { page, orderBy } = req.query; console.log("orderBy", orderBy);
     const order = orderBy == 0 ? {} : { price: orderBy };
     const options = {
-      page: page,
+      page: parseInt(page),
       limit: 4,
       sort: order
     };
-    console.log(options)
+    console.log("option", options)
     const products = await productModel.paginate({}, options);
     console.log(products);
     return     res.json({
       status: "success",
-      payload: products,
+      payload: products    
     });
   }
     catch (error) {
     console.error("Error al leer los productos:", error);
-    throw error;
+    //throw error;
   }
+
+  
  
 
 

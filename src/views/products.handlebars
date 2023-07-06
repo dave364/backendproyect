@@ -27,101 +27,107 @@
 
 <script>
   const deleteButton = (id) => {
-    console.log('deleteProducts', id);
-    // Aquí puedes realizar alguna acción para eliminar el producto
-  }
+  console.log('deleteProducts', id);
+  // Aquí puedes realizar alguna acción para eliminar el producto
+}
 
-  const getProduct = (order) => {
-    fetch('/api/products?order=' + order)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Productos obtenidos:', data.payload.docs);
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = '';
+const getProduct = (page, orderBy) => {
+  fetch(`/api/products?page=${page}&orderBy=${orderBy}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Productos obtenidos:-', data);
+      const tableBody = document.getElementById('table-body');
+      tableBody.innerHTML = '';
 
-        if (Array.isArray(data.payload.docs)) {
-          const productList = data.payload.docs;
+      if (Array.isArray(data.payload.docs)) {
+        const productList = data.payload.docs;
 
-          productList.forEach(product => {
-            const row = `
-              <tr>
-                <td>${product._id}</td>
-                <td>${product.name}</td>
-                <td>${product.category}</td>
-                <td>${product.price}</td>
-                <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${product._id}')">Comprar</button></td>
-              </tr>
-            `;
-            tableBody.innerHTML += row;
-          });
-        } else {
-          console.log('La propiedad "docs" no existe o no es un array');
-        }
-
-        pageButtons(data.payload);
-      })
-      .catch(error => {
-        console.log('Error al obtener los productos:', error);
-      });
-  }
-
-  // Llama a la función getProduct inicialmente para mostrar los productos
-  getProduct(0);
-
-  function pageButtons(state) {
-    var wrapper = document.getElementById('pagination-wrapper');
-    wrapper.innerHTML = '';
-
-    for (let page = 1; page <= state.totalPages; page++) {
-      wrapper.innerHTML += `<button value=${page} class="page btn btn-sm btn-info" style=${page == state.page ? 'color:black;' : null}>${page}</button>`;
-    }
-
-    if (state.hasPrevPage) {
-      wrapper.innerHTML = `<button value=${state.prevPage} class="page btn btn-sm btn-info">&#171; First</button>` + wrapper.innerHTML;
-    }
-
-    if (state.hasNextPage) {
-      wrapper.innerHTML += `<button value=${state.nextPage} class="page btn btn-sm btn-info">Last &#187;</button>`;
-    }
-
-    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0)">Limpiar</button>`;
-    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(-1)">Mayor precio</button>`;
-    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(1)">Menor precio</button>`;
-
-   $('.page').on('click', function() {
-  const page = Number($(this).val());
-  getProduct(page);
-});
-  }
-
-  function buildTable(state) {
-    console.log("data", state);
-    console.log("payload", state.querySet);
-
-    var table = $('#table-body');
-    table.empty(); // Vaciar el contenido actual de la tabla
-
-    if (state.querySet.length > 0) {
-      var myList = state.querySet;
-
-      for (let i = 0; i < myList.length; i++) {
-        var row = `
-          <tr>
-            <td>${myList[i]._id}</td>
-            <td>${myList[i].name}</td>
-            <td>${myList[i].category}</td>
-            <td>${myList[i].price}</td>
-            <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${myList[i]._id}')">Comprar</button></td>
-          </tr>`;
-        table.append(row);
+        productList.forEach(product => {
+          const row = `
+            <tr>
+              <td>${product._id}</td>
+              <td>${product.name}</td>
+              <td>${product.category}</td>
+              <td>${product.price}</td>
+              <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${product._id}')">Comprar</button></td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+      } else {
+        console.log('La propiedad "docs" no existe o no es un array');
       }
-    } else {
-      var noProductsRow = `<tr><td colspan="6">No hay productos disponibles</td></tr>`;
-      table.append(noProductsRow);
-    }
 
-    pageButtons(state);
+      pageButtons(data.payload, orderBy);
+    })
+    .catch(error => {
+      console.log('Error al obtener los productos:', error);
+    });
+}
+
+
+
+// Llama a la función getProduct inicialmente para mostrar los productos
+getProduct(0,0);
+
+function pageButtons(state, orderBy) { console.log("state",state, orderBy)
+  var wrapper = document.getElementById('pagination-wrapper');
+  wrapper.innerHTML = '';
+
+  for (let page = 1; page <= state.totalPages; page++) {
+    wrapper.innerHTML += `<button value=${page} class="page btn btn-sm btn-info" style=${page == state.page ? 'color:black;' : null}>${page}</button>`;
   }
+
+  if (state.hasPrevPage) {
+    wrapper.innerHTML = `<button value=${state.prevPage} class="page btn btn-sm btn-info">&#171; First</button>` + wrapper.innerHTML;
+  }
+
+  if (state.hasNextPage) {
+    wrapper.innerHTML += `<button value=${state.nextPage} class="page btn btn-sm btn-info">Last &#187;</button>`;
+  }
+
+  wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, 0)">Limpiar</button>`;
+  wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, -1)">Mayor precio</button>`;
+  wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, 1)">Menor precio</button>`;
+
+  $('.page').on('click', function() { 
+    const page = Number($(this).val());
+    getProduct(page, orderBy);
+  });
+}
+
+
+/*
+function buildTable(state) {
+  console.log("data", state);
+  console.log("payload", state.querySet);
+
+  var table = $('#table-body');
+  table.empty(); // Vaciar el contenido actual de la tabla
+
+  if (state.querySet.length > 0) {
+    var myList = state.querySet.docs; // Obtener los productos de la página actual
+
+    for (let i = 0; i < myList.length; i++) {
+      var row = `
+        <tr>
+          <td>${myList[i]._id}</td>
+          <td>${myList[i].name}</td>
+          <td>${myList[i].category}</td>
+          <td>${myList[i].price}</td>
+          <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${myList[i]._id}')">Comprar</button></td>
+        </tr>`;
+      table.append(row);
+    }
+  } else {
+    var noProductsRow = `<tr><td colspan="6">No hay productos disponibles</td></tr>`;
+    table.append(noProductsRow);
+  }*/
+
+  pageButtons(state);
+
+
+
 </script>
 
 <style>

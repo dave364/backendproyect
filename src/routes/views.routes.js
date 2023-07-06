@@ -4,7 +4,7 @@ import { Router } from "express";
 const ViewsRouter = Router();
 
 // Ruta para renderizar la vista products.handlebars
-ViewsRouter.get("/", (req, res) => {
+ViewsRouter.get("/", (req, res) => {console.log("viewRouter", res);
   res.render("products");
 });
 
