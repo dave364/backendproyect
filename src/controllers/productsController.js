@@ -1,8 +1,7 @@
 import { productModel } from "../model/Product.js";
 
-
 export const addProduct = async (req, res) => {
-  console.log("addProduct")
+ 
   const { name, category, price } = req.body;
 
   try {
@@ -22,4 +21,31 @@ export const addProduct = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+export const getProducts = async (req, res) => {
+
+    try {
+      /*console.log("holaa", req);*/
+  
+      const { page, orderBy } = req.query; 
+      const order = orderBy == 0 ? {} : { price: orderBy };
+      const options = {
+        page: parseInt(page),
+        limit: 4,
+        sort: order
+      };
+      
+      const products = await productModel.paginate({}, options);
+     
+      return     res.json({
+        status: "success",
+        payload: products    
+      });
+    }
+      catch (error) {
+      console.error("Error al leer los productos:", error);
+      //throw error;
+    }
+  
 };
