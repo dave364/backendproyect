@@ -1,7 +1,13 @@
 <!-- cart.handlebars -->
+<div class="page-nav d-flex justify-content-between align-items-center">
+  <button id="btnVolver" class="button-volver">Volver</button>
+  <h1 class="text-center">Carrito</h1>
+  <button id="btnFinalizar" class="button-finalizar">Finalizar compra</button>
+</div>
 
-<h1>Carrito</h1>
 
+<div id="page-content" class="page-content">
+  <div class="container "></div>
 {{#if productsCart.length}}
   <div class="table-responsive">
     <table class="table table-hover">

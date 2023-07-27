@@ -17,10 +17,14 @@ button {
     background-color: #2196F3;
     border: 1px solid black;
     position: relative;
+    display: flex; /* Añadimos flexbox */
+  justify-content: space-between; /* Distribuye los elementos a los extremos */
+  align-items: center; /* Centra verticalmente los elementos */
 }
 
 .page-nav h1 {
     margin: 20px;
+    flex-grow: 1; /* Hace que el título ocupe el espacio restante */
 }
 
 .button-checkout {
@@ -29,6 +33,16 @@ button {
     border: 2px solid #008CBA; /* Blue */
     transition-duration: 0.4s;
     position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+.button-checkout2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA; /* Blue */
+    transition-duration: 0.4s;
+    position: relative;
     right: 15px;
     bottom: 15px;
 }
@@ -169,37 +183,19 @@ input {
 .btn {
     margin: 1px;
 }
-/*cart*/
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+
+.button-volver {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA; /* Blue */
+    transition-duration: 0.4s;
+    margin-right: 10px; /* Agregamos margen para separar del título */
   }
   
-  /* Estilos para la lista de productos en el carrito */
-  ul {
-    list-style-type: none;
-    padding: 0;
+  .button-finalizar {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA; /* Blue */
+    transition-duration: 0.4s;
   }
   
-  li {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  li h2 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
-  
-  li p {
-    margin: 0;
-  }
-  
-  /* Estilos para el mensaje cuando no hay productos en el carrito */
-  .no-products-message {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #888;
-    margin: 20px 0;
-  }
