@@ -147,53 +147,41 @@ export const deleteAllProductsFromCart = async (req, res) => {
 };
   
 
-  
-  
+ // Actualizar el carrito con un arreglo de productos
+export const updateCartProducts = async (req, res) => {
+  const cartId = req.params.cid;
+  const { products } = req.body;
 
-  
-  
-  
+  try {
+    const updatedCart = await cartModel.findByIdAndUpdate(cartId, { products }, { new: true });
+    res.json({ message: "Carrito actualizado exitosamente", cart: updatedCart });
+  } catch (error) {
+    console.error("Error al actualizar el carrito:", error);
+    res.status(500).json({ message: "Error al actualizar el carrito" });
+  }
+};
 
-  export const putProduct = async (req, res) => { 
-    const { productId } = req.params;
-    const body = req.body;
-    const { query } = body.query;
-  
-    /* Buscamos el producto en el carrito */
-    const productBuscado = await Cart.findById(productId); console.log("putproducts")
-  
-    /* Si no hay query 'add' o 'del' */
-    /*if (!query) {
-      res.status(404).json({ mensaje: "Debes enviar una query" });
-  
-  
-    } 
-    
-    else if (productBuscado && query === "add") {
-      body.amount = body.amount + 1;
-  
-      await Cart.findByIdAndUpdate(productId, body, {
-        new: true,
-      }).then((product) => {
-        res.json({
-          mensaje: `El producto: ${product.name} fue actualizado`,
-          product,
-        });
-      });
-  
-    } else if (productBuscado && query === "del") {
-      body.amount = body.amount - 1;
-  
-      await Cart.findByIdAndUpdate(productId, body, {
-        new: true,
-      }).then((product) =>
-        res.json({
-          mensaje: `El producto: ${product.name} fue actualizado`,
-          product,
-        })
-      );
+// Actualizar la cantidad de un producto en el carrito
+export const updateProductQuantity = async (req, res) => {
+  const cartId = req.params.cid;
+  const productId = req.params.pid;
+  const { quantity } = req.body;
+
+  try {
+    const updatedCart = await cartModel.findOneAndUpdate(
+      { _id: cartId, "products.product": productId },
+      { $set: { "products.$.quantity": quantity } },
+      { new: true }
+    );
+
+    if (updatedCart) {
+      res.json({ message: "Cantidad del producto actualizada exitosamente", cart: updatedCart });
     } else {
-      res.status(400).json({ mensaje: "Ocurrió un error" });
-    }*/ res.status(200)
-  };
+      res.status(404).json({ message: "No se encontró el carrito o el producto" });
+    }
+  } catch (error) {
+    console.error("Error al actualizar la cantidad del producto en el carrito:", error);
+    res.status(500).json({ message: "Error al actualizar la cantidad del producto en el carrito" });
+  }
+};
 
