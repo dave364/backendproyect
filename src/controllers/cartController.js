@@ -1,6 +1,6 @@
-import Cart from "../model/Cart.js";
+
 import { productModel } from "../model/Product.js";
-//import { cartModel } from "../model/Cart.js";
+import { cartModel } from "../model/Cart.js";
 
 
 export const addProductCart = async (req, res) => {
@@ -106,17 +106,50 @@ export const deleteAllProductsFromCart = async (req, res) => {
     }
   };
   
-  export const getProductsCart = async (req, res) => {
-    const productsCart = await Cart.find();
+  export const getProductsCartApi = async (req, res) => {
+    try {
+      const productsCart = await cartModel.find();
   
-    if (productsCart) {
-      res.json({ productsCart });
-    } else {
-      res.json({ mensaje: "No hay productos en el carrito" });
+      if (productsCart.length > 0) {
+        res.json({ productsCart });
+      } else {
+        res.json({ mensaje: "No hay productos en el carrito" });
+      }
+    } catch (error) {
+      console.error("Error al obtener los productos del carrito:", error);
+      res.status(500).json({ mensaje: "Error al obtener los productos del carrito desde la base de datos" });
     }
   };
   
-;
+ export const getProductsCartView = async (req, res) => {
+  try {
+    const productsCart = await cartModel.find();
+
+    if (productsCart.length > 0) {
+      const cart = productsCart[0];
+      const products = await Promise.all(cart.products.map(async (item) => {
+        const product = await productModel.findById(item.product);
+        return {
+          _id: product._id,
+          name: product.name,
+          quantity: item.quantity,
+        };
+      }));
+
+      return { productsCart: products };
+    } else {
+      return { productsCart: [] };
+    }
+  } catch (error) {
+    console.error("Error al obtener los productos del carrito:", error);
+    return { productsCart: [] };
+  }
+};
+  
+
+  
+  
+
   
   
   

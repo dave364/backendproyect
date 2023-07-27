@@ -1,7 +1,6 @@
 import { Router } from "express";
-import path from "path";
 import {
-  getProductsCart,
+  getProductsCartApi,
   addProductCart,
   putProduct,
   deleteProductFromCart,
@@ -11,7 +10,7 @@ import {
 const CartRouter = Router();
 
 // Obtener un producto por su ID
-CartRouter.get("/", getProductsCart); 
+CartRouter.get("/", getProductsCartApi); 
 
 // Agregar un producto al carrito
 CartRouter.post("/:cid/products-cart/:pid", addProductCart);

@@ -1,10 +1,11 @@
 <h1>Carrito</h1>
 
-{{#if cart.products.length}}
+{{#if productsCart.length}}
   <ul>
-    {{#each cart.products}}
+    {{#each productsCart}}
       <li>
-        <h2>{{this.product._id}}</h2>
+        <h2>{{this.name}}</h2>
+        <h2>{{this._id}}</h2>
         <p>Cantidad: {{this.quantity}}</p>
         <!-- Puedes mostrar más detalles del producto aquí, como nombre, precio, etc., utilizando la estructura del objeto del producto -->
       </li>
