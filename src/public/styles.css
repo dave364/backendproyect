@@ -169,4 +169,37 @@ input {
 .btn {
     margin: 1px;
 }
-
+/*cart*/
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para la lista de productos en el carrito */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  li h2 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  li p {
+    margin: 0;
+  }
+  
+  /* Estilos para el mensaje cuando no hay productos en el carrito */
+  .no-products-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin: 20px 0;
+  }

@@ -1,6 +1,6 @@
 <div class="page-nav">
   <h1>Mi tienda</h1>
-  <button id="checkout" class="button-checkout" onclick="showOrder()">Carrito</button>
+  <button id="checkout" class="button-checkout" onclick="redirectToCart()">Carrito</button>
 </div>
 <div id="page-content" class="page-content">
   <div class="container "></div>
@@ -96,39 +96,19 @@ function pageButtons(state, orderBy) { console.log("state",state, orderBy)
   });
 }
 
-
-/*
-function buildTable(state) {
-  console.log("data", state);
-  console.log("payload", state.querySet);
-
-  var table = $('#table-body');
-  table.empty(); // Vaciar el contenido actual de la tabla
-
-  if (state.querySet.length > 0) {
-    var myList = state.querySet.docs; // Obtener los productos de la página actual
-
-    for (let i = 0; i < myList.length; i++) {
-      var row = `
-        <tr>
-          <td>${myList[i]._id}</td>
-          <td>${myList[i].name}</td>
-          <td>${myList[i].category}</td>
-          <td>${myList[i].price}</td>
-          <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${myList[i]._id}')">Comprar</button></td>
-        </tr>`;
-      table.append(row);
-    }
-  } else {
-    var noProductsRow = `<tr><td colspan="6">No hay productos disponibles</td></tr>`;
-    table.append(noProductsRow);
-  }*/
-
   pageButtons(state);
 
 
 
 </script>
+
+<script>
+function redirectToCart() {
+  window.location.href = "/cart";
+}
+
+</script>
+
 
 <style>
 

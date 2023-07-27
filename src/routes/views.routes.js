@@ -1,8 +1,10 @@
 import { Router } from "express";
+
 import { getProductsCartView } from "../controllers/cartController.js";
 
 
 const ViewsRouter = Router();
+
 
 // Ruta para renderizar la vista products.handlebars
 ViewsRouter.get("/", (req, res) => {
@@ -10,14 +12,14 @@ ViewsRouter.get("/", (req, res) => {
 });
 
 // Ruta para renderizar la vista cart.handlebars
-ViewsRouter.get("/list", async (req, res) => {
+ViewsRouter.get("/cart", async (req, res) => {
   try {
     const response = await getProductsCartView(req, res);
     const productsCart = response.productsCart;
 
     console.log("Productos obtenidos:", productsCart);
 
-    res.render("cart", { productsCart });
+    res.render("cart", { productsCart,  });
   } catch (error) {
     console.error("Error al obtener los productos del carrito:", error);
     res.render("cart", { productsCart: [] });

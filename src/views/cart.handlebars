@@ -1,16 +1,33 @@
+<!-- cart.handlebars -->
+
 <h1>Carrito</h1>
 
 {{#if productsCart.length}}
-  <ul>
-    {{#each productsCart}}
-      <li>
-        <h2>{{this.name}}</h2>
-        <h2>{{this._id}}</h2>
-        <p>Cantidad: {{this.quantity}}</p>
-        <!-- Puedes mostrar más detalles del producto aquí, como nombre, precio, etc., utilizando la estructura del objeto del producto -->
-      </li>
-    {{/each}}
-  </ul>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Código de Referencia</th>
+          <th scope="col">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each productsCart}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this._id}}</td>
+            <td>{{this.quantity}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 {{else}}
-  <p>No hay productos en el carrito</p>
+  <p class="alert alert-info">No hay productos en el carrito</p>
 {{/if}}
+
+
+
+
+
