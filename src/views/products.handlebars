@@ -1,10 +1,21 @@
 <div class="page-nav">
+   
   <h1>Mi tienda</h1>
   <button id="checkout" class="button-checkout" onclick="redirectToCart()">Carrito</button>
 </div>
 <div id="page-content" class="page-content">
   <div class="container "></div>
   <div class="container ">
+    <div id="verProductsHome">
+   {{#if user}}
+    <div>
+            <h1>Hola, {{user.name}}</h1>
+            <p>Correo: {{user.email}}</p>
+            <p>Rol : {{user.role}}</p>
+            <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
+    </div>
+   {{/if}}
+  </div>
     <!-- Table structure here -->
     <table class="table table-dark" id="our-table">
       <thead>
@@ -109,7 +120,4 @@ function redirectToCart() {
 
 </script>
 
-
-<style>
-
-</style>
+<script src="/js/home.js"></script>

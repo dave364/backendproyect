@@ -7,9 +7,9 @@
 
 
 <div id="page-content" class="page-content">
-  <div class="container "></div>
+  <div class="container ">
 {{#if productsCart.length}}
-  <div class="table-responsive">
+  <div class="table table-dark" id="our-table">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -28,6 +28,7 @@
         {{/each}}
       </tbody>
     </table>
+  </div>
   </div>
 {{else}}
   <p class="alert alert-info">No hay productos en el carrito</p>

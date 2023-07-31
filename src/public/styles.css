@@ -22,6 +22,12 @@ button {
   align-items: center; /* Centra verticalmente los elementos */
 }
 
+.page-nav-login {
+    background-color: #2196F3;
+    border: 1px solid black;
+    position: relative;
+}
+
 .page-nav h1 {
     margin: 20px;
     flex-grow: 1; /* Hace que el título ocupe el espacio restante */

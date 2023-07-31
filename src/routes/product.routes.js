@@ -3,7 +3,7 @@ import {
   getProducts,
   addProduct,
 
-} from "../controllers/productsController.js";
+} from "../dao/controllers/productsController.js";
 
 const ProductRouter = Router();
 
