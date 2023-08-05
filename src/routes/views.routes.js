@@ -1,46 +1,20 @@
 import { Router } from "express";
-import { getProductsCartView } from "../dao/controllers/cartController.js";
 import { privacy, handlePolicies } from "../middlewares/auth.js";
+import viewsController from "../controllers/views.controller.js";
 
 const ViewsRouter = Router();
 
 
 // Ruta para renderizar la vista products.handlebars
-ViewsRouter.get("/", (req, res) => {
-  res.render("products", {user:req.session.user });
-});
+ViewsRouter.get("/",viewsController.mostrarProductos)
 
 // Ruta para renderizar la vista cart.handlebars
-ViewsRouter.get("/cart", async (req, res) => {
-  try {
-    const response = await getProductsCartView(req, res);
-    const productsCart = response.productsCart;
+ViewsRouter.get("/cart", viewsController.getCarrito)
 
-    console.log("Productos obtenidos:", productsCart);
+ViewsRouter.get('/register',privacy('NO_AUTHENTICATED'),viewsController.register)
 
-    res.render("cart", { productsCart,  });
-  } catch (error) {
-    console.error("Error al obtener los productos del carrito:", error);
-    res.render("cart", { productsCart: [] });
-  }
-});
+ViewsRouter.get('/login',privacy('NO_AUTHENTICATED'),viewsController.login)
 
-ViewsRouter.get('/register',privacy('NO_AUTHENTICATED'),(req,res)=>{
-  res.render('register',{css:'home'});
-})
+ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER']),viewsController.profile)
 
-ViewsRouter.get('/login',privacy('NO_AUTHENTICATED'),(req,res)=>{
-  res.render('login',{css:'home'});
-})
-
-ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER']),(req,res)=>{
-  res.render('profile',{user:req.session.user})
-});
-
-
-
-
-
-
-
-export default ViewsRouter;
+export default ViewsRouter; 

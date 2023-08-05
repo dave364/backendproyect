@@ -1,7 +1,7 @@
 
 import userModel from "../model/user.js";
 
-export default class UserManagerMongo {
+export default class UserManager {
 
     
     createUser = (user) =>{

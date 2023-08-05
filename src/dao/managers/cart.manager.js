@@ -2,8 +2,9 @@
 import { productModel } from "../model/Product.js";
 import { cartModel } from "../model/Cart.js";
 
+export default class CartsManager {
 
-export const addProductCart = async (req, res) => {
+ addProductCart = async (req, res) => {
   const { cid, pid } = req.params;
 
   try {
@@ -45,7 +46,7 @@ export const addProductCart = async (req, res) => {
   }
 };
 
-export const deleteAllProductsFromCart = async (req, res) => {
+ deleteAllProductsFromCart = async (req, res) => {
     const { cartId } = req.params;
   
     try {
@@ -69,7 +70,7 @@ export const deleteAllProductsFromCart = async (req, res) => {
     }
   };
 
-  export const deleteProductFromCart = async (req, res) => {
+   deleteProductFromCart = async (req, res) => {
     const { cartId, productId } = req.params;
   
     try {
@@ -106,7 +107,7 @@ export const deleteAllProductsFromCart = async (req, res) => {
     }
   };
   
-  export const getProductsCartApi = async (req, res) => {
+   getProductsCartApi = async (req, res) => {
     try {
       const productsCart = await cartModel.find();
   
@@ -121,7 +122,7 @@ export const deleteAllProductsFromCart = async (req, res) => {
     }
   };
   
- export const getProductsCartView = async (req, res) => {
+  getProductsCartView = async (req, res) => {
   try {
     const productsCart = await cartModel.find();
 
@@ -148,7 +149,7 @@ export const deleteAllProductsFromCart = async (req, res) => {
   
 
  // Actualizar el carrito con un arreglo de productos
-export const updateCartProducts = async (req, res) => {
+ updateCartProducts = async (req, res) => {
   const cartId = req.params.cid;
   const { products } = req.body;
 
@@ -162,7 +163,7 @@ export const updateCartProducts = async (req, res) => {
 };
 
 // Actualizar la cantidad de un producto en el carrito
-export const updateProductQuantity = async (req, res) => {
+ updateProductQuantity = async (req, res) => {
   const cartId = req.params.cid;
   const productId = req.params.pid;
   const { quantity } = req.body;
@@ -183,7 +184,10 @@ export const updateProductQuantity = async (req, res) => {
     console.error("Error al actualizar la cantidad del producto en el carrito:", error);
     res.status(500).json({ message: "Error al actualizar la cantidad del producto en el carrito" });
   }
-};
+}
+}
+
+
 
 
 

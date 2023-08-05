@@ -9,9 +9,10 @@ import { engine } from "express-handlebars";
 import __dirname from "./utils.js";
 import * as path from "path";
 import ProductRouter from "./routes/product.routes.js";
-import CartRouter from "./routes/cartRoutes.js";
+import CartRouter from "./routes/cart.routes.js";
 import ViewsRouter from "./routes/views.routes.js";
 import sessionsRouter from "./routes/session.router.js"
+import './config.js'
 
 const app = express();
 app.use(express.static('src/public', { 

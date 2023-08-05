@@ -1,13 +1,13 @@
 import passport from "passport";
 import local from "passport-local";
 import userModel from "../dao/model/user.js";
-import UserManagerMongo from "../dao/controllers/UserManagerMongo.js";
+import UserManager from "../dao/managers/user.manager.js";
 import { createHash ,validatePassword} from "../utils.js";
 import GithubStrategy from 'passport-github2'
 
 
 const LocalStrategy = local.Strategy;
-const user = new UserManagerMongo();
+const user = new UserManager();
 
 const initializePassport = () =>{
     passport.use('register',new LocalStrategy({passReqToCallback: true, usernameField:'email'},async (req,email,password,done)=>{
@@ -40,7 +40,7 @@ const initializePassport = () =>{
     passport.use('login',new LocalStrategy({usernameField:'email'},async(email,password,done) => {
           
         let userAux2
-    if (email==='adminCoder@coder.com' &&   password==='adminCod3r123' ){
+    if (email=== process.env.ADMIN_EMAIL &&   password=== process.env.ADMIN_PWD ){
         userAux2 = {
             id: 0,
             name: `Admin`,
