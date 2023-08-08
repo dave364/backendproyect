@@ -25,11 +25,9 @@ export default class ProductManager {
     }
   };
 
-  getProducts = async () => {
+  getProducts = async (page, orderBy) => {
     try {
-      console.log('req.query:', this.req.query);
-      const { page, orderBy } = this.req.query;
-      console.log('page:', page, 'orderBy:', orderBy);
+      console.log('page:', page, 'orderBy:', orderBy, );
       const order = orderBy == 0 ? {} : { price: orderBy };
       const options = {
         page: parseInt(page),
@@ -39,10 +37,10 @@ export default class ProductManager {
 
       const products = await productModel.paginate({}, options);
 
-      this.res.json({
+     return {
         status: "success",
         payload: products,
-      });
+      };
     } catch (error) {
       console.error("Error al leer los productos manager:", error);
       //throw error;
