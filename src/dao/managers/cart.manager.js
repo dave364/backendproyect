@@ -1,5 +1,5 @@
 
-import { productModel } from "../model/Product.js";
+import  productModel  from "../model/Product.js";
 import { cartModel } from "../model/Cart.js";
 
 export default class CartsManager {
@@ -112,8 +112,10 @@ export default class CartsManager {
       const productsCart = await cartModel.find();
   
       if (productsCart.length > 0) {
-        res.json({ productsCart });
+        console.log("Products found in cart:", productsCart);
+        return { productsCart };
       } else {
+        console.log("No products in cart");
         res.json({ mensaje: "No hay productos en el carrito" });
       }
     } catch (error) {
@@ -186,6 +188,8 @@ export default class CartsManager {
   }
 }
 }
+
+
 
 
 

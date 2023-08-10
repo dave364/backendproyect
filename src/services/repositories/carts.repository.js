@@ -1,4 +1,4 @@
-export default class CartsService {
+export default class CartsRepository {
   constructor(dao){
       this.dao =dao;
   }
@@ -18,7 +18,7 @@ export default class CartsService {
     return this.dao.getProductsCartApi();
   }
 
-   getProductsCartView= ()=>{
+   getProductsCartView = ()=>{
     return this.dao.getProductsCartView();
   }
 

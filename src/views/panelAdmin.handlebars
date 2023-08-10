@@ -1,0 +1,86 @@
+<div class="container">
+<div class="text-center">
+<div class="tituloadmin">
+    <h1 class="page-nav-login">Sesión Admin</h1>
+    <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
+    </div>
+</div>
+    <div class="mt-4 formConteiner">
+        <h1 class="text-center">Ingresar Nuevos Productos</h1>
+        <form id="formulario" action="" class="needs-validation">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="name" required>
+            <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+           
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio:</label>
+                <input type="text" class="form-control" name="price" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Categoría:</label>
+                <input type="text" class="form-control" name="category" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+         
+            <button class="pages btn btn-sm btn-info" type="submit">Enviar</button>
+        </form>
+        <span class="errorForm">Alguno de los campos no fue ingresado !</span>
+    </div>
+    
+    <div class="mt-4 formConteinerActualizacion">
+        <h1 class="text-center">Actualizar Producto</h1>
+        <form  id="formularioActualizacion" action="" class="needs-validation">
+            
+            <div class="mb-3">
+                <label for="id" class="form-label">Id:</label>
+                <input type="text" class="form-control" name="id" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="name" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio:</label>
+                <input type="text" class="form-control" name="price" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Categoría:</label>
+                <input type="text" class="form-control" name="category" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+         
+            <button class="pages btn btn-sm btn-info" type="submit">Enviar</button>
+        </form>
+        <span class="errorFormAct">Alguno de los campos no fue ingresado !</span>
+    </div>
+
+     <div class="mt-4 formConteinerEliminar">
+        <h1 class="text-center">Eliminar Producto</h1>
+        <form  id="formularioEliminar" action="" class="needs-validation">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id:</label>
+                <input type="text" class="form-control" name="id" required>
+                <div class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+         
+            <button class="pages btn btn-sm btn-info" type="submit">Enviar</button>
+        </form>
+        <span class="errorFormEli">Alguno de los campos no fue ingresado !</span>
+    </div>
+
+</div>
+
+
+
+<script src="/js/panelAdmin.js"></script>

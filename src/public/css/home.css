@@ -1,5 +1,60 @@
 
 
+#cart{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:flex ;
+    flex-direction: column;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    padding-left: 15px;
+    gap:10px;
+    text-align: left;
+}
+
+.keyDer{
+    color:blue;
+    font-weight: bold;    
+}
+
+#mostrarProductos,.mostrarCarrito{
+    display: flex;   
+    flex-direction: column;
+    gap:30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    align-items: center;
+}
+
+p{
+    margin: 0;
+}
+
+.mostrarProductosCart{
+    display: flex;    
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.productosCarritoContenedor{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    
+}
+
+.mb-3 {
+    padding: 2%;
+}
+
+
 body {
     margin: 0px;
     background-color: aliceblue;
@@ -205,87 +260,4 @@ input {
     transition-duration: 0.4s;
   }
   
-/* Agrega margen y estilo general a los contenedores de formularios */
-.formConteiner,
-.formConteinerActualizacion,
-.formConteinerEliminar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: white;
-    border: 3px solid #ccc;
-    border-radius: 10px;
-}
 
-.tituloadmin {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: white;
-    border: 3px solid #ccc;
-    border-radius: 10px;
-}
-
-/* Estilo específico para los títulos de los formularios */
-.formConteiner h1,
-.formConteinerActualizacion h1,
-.formConteinerEliminar h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-/* Estilo para los mensajes de error en los formularios */
-.errorForm,
-.errorFormAct,
-.errorFormEli {
-    display: none;
-    color: red;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-/* Mostrar mensajes de error cuando sea necesario */
-.errorForm.show,
-.errorFormAct.show,
-.errorFormEli.show {
-    display: block;
-}
-
-/* Estilo para los botones en los formularios */
-.formConteiner button[type="submit"],
-.formConteinerActualizacion button[type="submit"],
-.formConteinerEliminar button[type="submit"] {
-    margin-top: 10px;
-}
-
-/* Estilo para los campos de formulario */
-.formConteiner input[type="text"],
-.formConteinerActualizacion input[type="text"],
-.formConteinerEliminar input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-/* Estilo para los campos de formulario en estado inválido */
-.formConteiner input:invalid,
-.formConteinerActualizacion input:invalid,
-.formConteinerEliminar input:invalid {
-    border-color: red;
-}
-
-/* Estilo para las etiquetas de los campos de formulario */
-.formConteiner label,
-.formConteinerActualizacion label,
-.formConteinerEliminar label {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Agrega espacio entre el botón "Salir" y el borde inferior */
-.page-nav-login a {
-    margin-top: 10px;
-}

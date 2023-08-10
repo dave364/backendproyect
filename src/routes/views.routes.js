@@ -17,4 +17,6 @@ ViewsRouter.get('/login',privacy('NO_AUTHENTICATED'),viewsController.login)
 
 ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER']),viewsController.profile)
 
+ViewsRouter.get('/paneladmin',privacy('PRIVATED'),handlePolicies(['ADMIN']),viewsController.panelAdmin)
+
 export default ViewsRouter; 

@@ -1,23 +1,19 @@
 import {productService} from "../services/index.js";
 
-export const addProduct = async (req, res) => {
-  const { name, category, price } = req.body;
-
-  try {
-    const result = await productService.addProduct(name, category, price);
-    if (result.error) {
-      return res.status(500).json(result);
-    }
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({
-      mensaje: "Error al agregar el producto",
-      error: error.message,
-    });
+ const addProduct = async (req, res) => {
+  const datos = req.body;
+  const { name, price,category } = datos
+  if (name && price && category ){
+      await productService.addProduct(datos) 
+      return res.send({status:"success"}) 
+  }
+  else {
+      return res.send({status:"alguno de los campos no fue completado"}) 
   }
 };
 
-export const getProducts = async (req, res) => {
+
+const getProducts = async (req, res) => {
   console.log(req.query)
   try {
     const { page, orderBy } = req.query;
@@ -36,7 +32,41 @@ export const getProducts = async (req, res) => {
   }
 };
 
+ const getProductsByID = async (req,res) =>{
+  const aux = await productService.getProductsByID(req.params.pid);
+ if (!aux){
+  return res.send("no existe el producto")
+ }
+
+  return res.send(aux)
+}
+
+const updateProduct =  async (req,res)=>{    
+  const idAux = req.params.pid;
+  const datos =  req.body;
+  const aux = await productService.updateProduct(idAux,datos)     
+  if (!aux){
+      return res.send("no existe el producto a modificar")
+  }   
+  res.send({status:"success"})   
+
+}
+
+const deleteProduct =  async (req,res)=>{
+  const idAux = req.params.pid;
+  const borrado = await productService.deleteProduct(idAux)    
+  console.log()
+  if (!borrado)  {
+      return res.send({status:" no success"})
+  }
+  return res.send({status:"si success"})
+
+}
+
 export default {
   addProduct,
   getProducts,
+  getProductsByID,
+  updateProduct,
+  deleteProduct
 };

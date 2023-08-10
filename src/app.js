@@ -13,6 +13,7 @@ import CartRouter from "./routes/cart.routes.js";
 import ViewsRouter from "./routes/views.routes.js";
 import sessionsRouter from "./routes/session.router.js"
 import './config.js'
+import nodemailer from 'nodemailer';
 
 const app = express();
 app.use(express.static('src/public', { 
@@ -27,15 +28,23 @@ app.use(cors());
 app.use(express.json());
 
 app.use(session({
-  // store: new fileStorage({path:`${__dirname}/sessions`, ttl: 15, retries:0 }),//time to live
   store: new MongoStore({
-    mongoUrl: "mongodb+srv://rodricjs22:Corega123@clustertuky.h1n5ekj.mongodb.net/ecommerce?retryWrites=true&w=majority",
+    mongoUrl: "mongodb+srv://castrodavid9872:ItNaMTm4F5cwWs0v@cluster364da.jqgneo9.mongodb.net/?retryWrites=true&w=majority",
     ttl: 3600,
   }),
   secret: "CoderS3cretFelis",
   resave: false,
   saveUninitialized: false
 }))
+
+export const transport = nodemailer.createTransport({
+  service:'gmail',
+  port:587,
+  auth:{
+      user:process.env.APP_EMAIL,
+      pass:process.env.APP_PASSWORD
+  }
+})
 
 app.use(passport.initialize());
 initializePassport();
@@ -61,8 +70,8 @@ app.use((req, res, next) => {
     next();
   }
 });
-
-app.listen(4000, () => {
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
   console.log("Server funcionando en el puerto 4000");
   db();
 });

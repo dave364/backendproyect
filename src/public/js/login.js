@@ -16,8 +16,14 @@ form.addEventListener('submit', async (event) => {
    const responseData = await response.json();
    console.log(responseData);
    if (responseData.status=="success"){
-     console.log("estas adentro");  
-    window.location.replace('/tienda');
+
+      if (responseData.payload==="Admin"){
+        window.location.replace('/panelAdmin');
+      }
+      else{
+        window.location.replace('/panelAdmin');
+      }
+   
     
    }
    else{

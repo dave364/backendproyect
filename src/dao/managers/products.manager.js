@@ -1,4 +1,5 @@
-import { productModel } from "../model/Product.js";
+import  productModel  from "../model/Product.js";
+import mongoose from "mongoose";
 
 export default class ProductManager {
   constructor(req, res) {
@@ -6,24 +7,10 @@ export default class ProductManager {
     this.res = res;
   }
 
-  addProduct = async () => {
-    const { name, category, price } = this.req.body;
-
-    try {
-      const newProduct = new productModel({ name, category, price });
-      const savedProduct = await newProduct.save();
-
-      this.res.json({
-        mensaje: "El producto fue agregado exitosamente",
-        product: savedProduct,
-      });
-    } catch (error) {
-      this.res.status(500).json({
-        mensaje: "Error al agregar el producto",
-        error: error.message,
-      });
-    }
-  };
+addProduct = (product) => {
+        
+  return productModel.create(product);
+}
 
   getProducts = async (page, orderBy) => {
     try {
@@ -46,6 +33,23 @@ export default class ProductManager {
       //throw error;
     }
   };
+
+  updateProduct = (id,product)=>{
+    const idValido = new mongoose.Types.ObjectId(id);
+    return productModel.findByIdAndUpdate({'_id':idValido},{$set:product})
+}
+
+  deleteProduct = (id)=>{
+    const idValido = new mongoose.Types.ObjectId(id);
+    return productModel.findOneAndDelete({_id:idValido});
+}
+
+getProductsByID =  (id)=>{
+  const idValido = new mongoose.Types.ObjectId(id);
+  return productModel.findOne({'_id':idValido});
+  
+}        
+
 }
 
 

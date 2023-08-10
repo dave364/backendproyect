@@ -1,25 +1,25 @@
 import passport from "passport";
 import local from "passport-local";
 import userModel from "../dao/model/user.js";
-import UserManager from "../dao/managers/user.manager.js";
+import {userService ,cartsService} from "../services/index.js";
 import { createHash ,validatePassword} from "../utils.js";
 import GithubStrategy from 'passport-github2'
 
 
 const LocalStrategy = local.Strategy;
-const user = new UserManager();
+
 
 const initializePassport = () =>{
     passport.use('register',new LocalStrategy({passReqToCallback: true, usernameField:'email'},async (req,email,password,done)=>{
         try{
             const {first_name,last_name} = req.body;
             // corroba si el usuario ya existe
-            const exists = await user.getUser({email})
+            const exists = await userService.getUser({email})
             if (exists) return done(null,false,{message:"el usuario ya existe"});
             // si el usuario no existe , encriptamos la password
             const hasshedPassword = await createHash(password);
             //creamos el carrito
-            const nuevoCart = await cart.createCart();
+            const nuevoCart = await cartsService.createCart();
             // num 3 construimos el usuario
 
             const userAux = {
@@ -29,7 +29,7 @@ const initializePassport = () =>{
                 cart:nuevoCart._id,
                 password:hasshedPassword
         }
-            const result = await user.createUser(userAux);
+            const result = await userService.createUser(userAux);
             // si todo salio bien
             done(null,result);
         }catch(error){
@@ -49,7 +49,7 @@ const initializePassport = () =>{
          }
         return done(null,userAux2)
     }
-    const userAux = await user.getUser({email})
+    const userAux = await userService.getUser({email})
    
     if (!userAux) return done(null,false,{message:"credenciales incorrectas"});
     
@@ -78,7 +78,7 @@ const initializePassport = () =>{
             const {name,login} = profile._json;
             let emailGitHub= `${login}@github.com`
             console.log(emailGitHub);
-            const userAux = await user.getUser({email:emailGitHub});
+            const userAux = await userService.getUser({email:emailGitHub});
             console.log(userAux)
             if(!userAux){
                 const newUser = {
@@ -86,7 +86,7 @@ const initializePassport = () =>{
                     email:emailGitHub,
                     password:''
                 }
-                const result = await user.createUser(newUser);
+                const result = await userService.createUser(newUser);
                 return done(null,result);
             }
             done(null,userAux);

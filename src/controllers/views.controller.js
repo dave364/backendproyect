@@ -1,4 +1,4 @@
-import { productService, cartService } from "../services/index.js";
+import { productService, cartsService } from "../services/index.js";
 
 // Ruta para renderizar la vista products.handlebars
 const mostrarProductos = async (req, res) => {
@@ -22,7 +22,7 @@ const mostrarProductos = async (req, res) => {
 // Ruta para renderizar la vista cart.handlebars
 const getCarrito = async (req, res) => {
   try {
-    const response = await cartService.getProductsCartView();
+    const response = await cartsService.getProductsCartView();
     const productsCart = response.productsCart;
 
     console.log("Productos obtenidos del carrito:", productsCart); // Agrega este console.log
@@ -46,10 +46,15 @@ const profile = (req, res) => {
   res.render('profile', { user: req.session.user });
 };
 
+const panelAdmin = (req,res) =>{
+  res.render('panelAdmin', { css:'home' })
+}
+
 export default {
   mostrarProductos,
   getCarrito,
   register,
   login,
-  profile
+  profile,
+  panelAdmin
 };

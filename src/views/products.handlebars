@@ -3,6 +3,27 @@
   <h1>Mi tienda</h1>
   <button id="checkout" class="button-checkout" onclick="redirectToCart()">Carrito</button>
 </div>
+{{#unless user}}
+<div class="text-center">
+
+    <h1 class="page-nav-login">Logeate</h1>
+
+    <form id="loginForm" >     
+      
+
+        <label>Email</label>
+        <input name="email">
+
+        <label>Contraseña</label>
+        <input type="password" name="password">
+
+        <input class="pages btn btn-sm btn-info"  type="submit">
+    </form>
+
+    <p>Tambien Puedes Ingresar Por Github</p>
+    <a href="/api/sessions/github"><button class="pages btn btn-sm btn-info" >github</button></a>
+</div>
+{{/unless}}
 <div id="page-content" class="page-content">
   <div class="container "></div>
   <div class="container ">
@@ -11,7 +32,9 @@
     <div>
             <h1>Hola, {{user.name}}</h1>
             <p>Correo: {{user.email}}</p>
-            <p>Rol : {{user.role}}</p>
+            <p>ID: {{user.id}} </p>
+            <p>Role: {{user.role}}</p>
+            <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
             <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
     </div>
    {{/if}}
@@ -121,3 +144,5 @@ function redirectToCart() {
 </script>
 
 <script src="/js/home.js"></script>
+
+<script src="/js/login.js"></script>

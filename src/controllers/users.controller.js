@@ -1,3 +1,5 @@
+import TokenDTO from "../dtos/user/TokenDTO.js";
+
 const register = async(req,res)=>{
           
 
@@ -14,12 +16,8 @@ const login = async (req,res)=>{
  
   
   // crea la session 
-  req.session.user = {
-      name: req.user.name,
-      email: req.user.email,   
-      role:req.user.role,
-      id:req.user.id     
-   }   
+  console.log(req.user)
+  req.session.user = new TokenDTO({name:req.user.name,email:req.user.email,role:req.user.role,id:req.user.id,cart:req.user.cart})  
   
   
    return res.status(200).send({status:"success",payload:"Credenciales Correctas"});

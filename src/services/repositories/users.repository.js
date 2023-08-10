@@ -1,4 +1,4 @@
-export default class UsersService {
+export default class UsersRepository {
     constructor(dao){
         this.dao =dao;
     }

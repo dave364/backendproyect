@@ -1,10 +1,15 @@
-import UserManager from "../dao/managers/user.manager.js";
-import CartsManager from "../dao/managers/cart.manager.js"
-import ProductManager from "../dao/managers/products.manager.js";
-import usersService from "./users.service.js"
-import cartsService from "./carts.service.js"
-import productsService from "./products.service.js";
+import PersistenceFactory from "../dao/factory.js"
+import usersRepository from "./repositories/users.repository.js"
+import cartsRepository from "./repositories/carts.repository.js"
+import productsRepository from "./repositories/products.repository.js";
+import ticketsRepository from "./repositories/ticket.repository.js"
 
-export const userService = new usersService (new UserManager());
-export const cartService = new cartsService(new CartsManager());
-export const productService = new productsService (new ProductManager());
+
+
+const { usersDAO, productDAO , cartDAO,ticketDAO } = await PersistenceFactory.getPersistence();
+
+
+export const userService = new usersRepository (usersDAO);
+export const cartsService = new cartsRepository(cartDAO);
+export const productService = new productsRepository (productDAO);
+export const ticketService = new ticketsRepository(ticketDAO);
