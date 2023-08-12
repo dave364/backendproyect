@@ -1,6 +1,9 @@
 import {cartsService,productService,userService,ticketService} from "../services/index.js";
 import { v4 as uuidv4 } from 'uuid';
 import { transport } from "../app.js";
+import ErrorService from "../services/ErrorService.js";
+import {productErrorNoExist} from "../constants/productErrors.js"
+import EErrors from "../constants/EErrors.js";
 
 export const addProductCart = async (req, res) => {
   const { cartId, productId, quantity } = req.params;
@@ -24,9 +27,18 @@ export const getProductsCartApi = async (req, res) => {
   try {
     const result = await cartsService.getProductsCartApi();
     res.json(result); // Usa el método json() aquí para enviar la respuesta
+
+    ErrorService.createError({
+      name:"Error de insercion del producto al carrito",
+      cause: productErrorNoExist(),
+      message: 'Error intentando insertar un  producto inexistente al carrito ',
+      code: EErrors.INVALID_TYPES,
+      status:400
+  })
+
   } catch (error) {
     console.error("Error al obtener los productos del carrito:", error);
-    res.status(500).json({ mensaje: "Error al obtener los productos del carrito desde la base de datos" });
+    next(error); 
   }
 };
 
@@ -50,7 +62,7 @@ export const updateProductQuantity = async (req, res) => {
 };
 
 export const FinalizarCompra = async (req,res) =>{
-  const CartId = await cartService.getCartsByID(req.params.cid);
+  const CartId = await cartsService.getCartsByID(req.params.cid);
   if (!CartId){
       return res.send({status:"success",message:"no existe el carrito con los productos a comprar"})  
      }
