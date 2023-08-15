@@ -14,8 +14,13 @@ import ViewsRouter from "./routes/views.routes.js";
 import sessionsRouter from "./routes/session.router.js"
 import './config.js'
 import nodemailer from 'nodemailer';
+import errorHandler from './middlewares/error.js'
+import attachLogger from './middlewares/logger.js'
 
 const app = express();
+
+app.use(attachLogger);
+
 app.use(express.static('src/public', { 
   setHeaders: (res, path) => {
     if (path.endsWith('.css')) {
@@ -52,6 +57,7 @@ initializePassport();
 app.use("/api/products", ProductRouter);
 app.use("/api/carts", CartRouter);
 app.use('/api/sessions',sessionsRouter);
+app.use(errorHandler);
 
 // Configura Handlebars como el motor de vistas
 app.engine("handlebars", engine());

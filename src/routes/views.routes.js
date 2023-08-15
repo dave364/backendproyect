@@ -19,4 +19,12 @@ ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER']),viewsController.prof
 
 ViewsRouter.get('/paneladmin',privacy('PRIVATED'),handlePolicies(['ADMIN']),viewsController.panelAdmin)
 
+ViewsRouter.get('/endpoint',(req,res)=>{       
+    req.logger.debug('This is a debug log message.');
+    req.logger.http('This is a debug log message.');
+    req.logger.info('This is a debug log message.');
+    req.logger.warning('This is a debug log message.');
+    req.logger.error('This is a debug log message.');
+    req.logger.fatal('This is a debug log message.');
+})
 export default ViewsRouter; 

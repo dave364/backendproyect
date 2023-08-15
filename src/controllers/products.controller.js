@@ -1,6 +1,11 @@
 import {productService} from "../services/index.js";
+import ErrorService from "../services/ErrorService.js";
+import {productErrorIncompleteValues} from "../constants/productErrors.js"
+import EErrors from "../constants/EErrors.js";
+import { tr } from "@faker-js/faker";
 
- const addProduct = async (req, res) => {
+ const addProduct = async (req, res, next) => {
+  try {
   const datos = req.body;
   const { name, price,category } = datos
   if (name && price && category ){
@@ -8,9 +13,22 @@ import {productService} from "../services/index.js";
       return res.send({status:"success"}) 
   }
   else {
-      return res.send({status:"alguno de los campos no fue completado"}) 
-  }
-};
+    ErrorService.createError({
+        name:"Error de creación de producto",
+        cause: productErrorIncompleteValues({title,price,category}),
+        message: 'Error intentando insertar un nuevo producto',
+        code: EErrors.INCOMPLETE_VALUES,
+        status:400
+    })
+           
+    return res.send({status:"alguno de los campos no fue completado"}) 
+}
+} catch (error) {
+    req.logger.error(error);
+    next(error);
+} 
+
+}
 
 
 const getProducts = async (req, res) => {

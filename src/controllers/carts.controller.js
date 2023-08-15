@@ -23,22 +23,30 @@ export const deleteProductFromCart = async (req, res) => {
   res.json({ message: result });
 };
 
-export const getProductsCartApi = async (req, res) => {
+export const getProductsCartApi = async (req, res, next) => {
   try {
     const result = await cartsService.getProductsCartApi();
-    res.json(result); // Usa el método json() aquí para enviar la respuesta
-
-    ErrorService.createError({
-      name:"Error de insercion del producto al carrito",
-      cause: productErrorNoExist(),
-      message: 'Error intentando insertar un  producto inexistente al carrito ',
-      code: EErrors.INVALID_TYPES,
-      status:400
-  })
+    res.json(result); // Responde con los productos del carrito
 
   } catch (error) {
     console.error("Error al obtener los productos del carrito:", error);
-    next(error); 
+
+    // Si el error se debe a que el producto no existe, crea un error personalizado
+    if (productErrorNoExist()) {
+      const customError = {
+        name: "Error de inserción del producto al carrito",
+        cause: productErrorNoExist(),
+        message: 'Error intentando insertar un producto inexistente al carrito',
+        code: EErrors.INVALID_TYPES,
+        status: 400
+      };
+
+      // Pasa el error personalizado al siguiente middleware para el manejo de errores
+      next(customError);
+    } else {
+      // Si el error no es debido a la falta de producto, pasa el error original
+      next(error);
+    }
   }
 };
 
