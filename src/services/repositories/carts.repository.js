@@ -1,9 +1,16 @@
 export default class CartsRepository {
   constructor(dao){
       this.dao =dao;
+  } 
+  createCart = ()=>{
+        return this.dao.createCart();
   }
-   addProductToCart = ()=>{
-    return this.dao.addProductToCart();
+  getCartsByID= (params)=>{
+    return this.dao.getCartsByID(params);
+  }
+
+  addProductCart = ()=>{
+    return this.dao.addProductCart();
   }
 
   deleteAllProductsFromCart= ()=>{

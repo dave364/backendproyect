@@ -1,9 +1,14 @@
-<div class="text-center">
-    <h1>Hola, {{user.name}}</h1>
-    <p>Correo: {{user.email}}</p>
-    <p>ID: {{user.id}} </p>
+<div class="profile-template">
+    <h1 class="profile-title">Hola, {{user.name}}</h1>
+    <p class="profile-email" email={{user.email}}>Correo: {{user.email}}</p>
+    <p class="profile-userID" id={{user.id}}>ID: {{user.id}} </p>
     <p>Role: {{user.role}}</p>
-    <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
-     <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
-    <a href="/"><button class="pages btn btn-sm btn-info">Ir a Productos</button></a>
+    <p id={{user.cart}} class="profile-idCarrito">Carrito: {{user.cart}}</p>
+    <a href="/api/sessions/logout"><button class="profile-button btn btn-sm btn-info">Salir</button></a>
+    <a href="/"><button class="profile-button btn btn-sm btn-info">Ir a Productos</button></a>
+    <button class="profile-button btn btn-sm btn-info profile-changeRol">Presione aqui para cambiar el Role a Premium o a USER</button>
 </div>
+
+
+
+<script src="/js/home.js"></script>

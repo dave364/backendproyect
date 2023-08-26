@@ -19,4 +19,9 @@ router.get('/githubcallback',passport.authenticate('github'),userController.gith
 
 router.get('/current',privacy('PRIVATED'),handlePolicies(['USER']),userController.current)
 
+router.post('/restoreRequest',userController.restoreRequest)
+
+router.post('/restorePassword',userController.restorePassword)
+
+
 export default router;

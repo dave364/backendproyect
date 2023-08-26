@@ -7,12 +7,9 @@ export default class PersistenceFactory {
         let productDAO;
         let cartDAO;
         let ticketDAO;
-        console.log("hola factory ")
-        console.log(process.env.PERSISTENCE)
-        console.log(process.env.ADMIN_EMAIL)
         switch(process.env.PERSISTENCE) {            
             case "FS":
-                // como solo tengo product y cart manager en fs lo dejo como referencia para futuros proyectos pero no los declaro . 
+                
                 break;
             
             case "MONGO":

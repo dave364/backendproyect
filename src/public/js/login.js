@@ -21,7 +21,7 @@ form.addEventListener('submit', async (event) => {
         window.location.replace('/panelAdmin');
       }
       else{
-        window.location.replace('/panelAdmin');
+        window.location.replace('/tienda');
       }
    
     

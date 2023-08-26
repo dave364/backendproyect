@@ -7,7 +7,11 @@ const schema = new mongoose.Schema({
     name:String,
     price:Number,
     category:String,
-    InCart:Boolean
+    InCart:Boolean,
+    owner:{
+        type:String,
+        default:'admin'
+    }
 })
 
 schema.plugin(mongoosePaginate);

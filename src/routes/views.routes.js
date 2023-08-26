@@ -6,18 +6,22 @@ const ViewsRouter = Router();
 
 
 // Ruta para renderizar la vista products.handlebars
-ViewsRouter.get("/",viewsController.mostrarProductos)
+ViewsRouter.get("/",privacy('PRIVATED'),handlePolicies(['USER','PREMIUM']),viewsController.mostrarProductos)
 
 // Ruta para renderizar la vista cart.handlebars
-ViewsRouter.get("/cart", viewsController.getCarrito)
+ViewsRouter.get("/cart", privacy('PRIVATED'),handlePolicies(['USER',"PREMIUM"]),viewsController.getCarrito)
 
 ViewsRouter.get('/register',privacy('NO_AUTHENTICATED'),viewsController.register)
 
 ViewsRouter.get('/login',privacy('NO_AUTHENTICATED'),viewsController.login)
 
-ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER']),viewsController.profile)
+ViewsRouter.get('/profile',handlePolicies(['ADMIN','USER',"PREMIUM"]),viewsController.profile)
 
-ViewsRouter.get('/paneladmin',privacy('PRIVATED'),handlePolicies(['ADMIN']),viewsController.panelAdmin)
+ViewsRouter.get('/paneladmin',privacy('PRIVATED'),handlePolicies(['ADMIN',"PREMIUM"]),viewsController.panelAdmin)
+
+ViewsRouter.get('/restoreRequest',privacy('NO_AUTHENTICATED'),viewsController.restoreRequest)
+
+ViewsRouter.get('/restorePassword',privacy('NO_AUTHENTICATED'),viewsController.restorePassword)
 
 ViewsRouter.get('/endpoint',(req,res)=>{       
     req.logger.debug('This is a debug log message.');

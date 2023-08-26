@@ -14,12 +14,14 @@ const initializePassport = () =>{
         try{
             const {first_name,last_name} = req.body;
             // corroba si el usuario ya existe
+           
             const exists = await userService.getUser({email})
+            
             if (exists) return done(null,false,{message:"el usuario ya existe"});
             // si el usuario no existe , encriptamos la password
             const hasshedPassword = await createHash(password);
             //creamos el carrito
-            const nuevoCart = await cartsService.createCart();
+            const nuevoCart = await cartService.createCart();
             // num 3 construimos el usuario
 
             const userAux = {
@@ -61,7 +63,8 @@ const initializePassport = () =>{
         id:userAux._id,
         name: `${userAux.first_name} ${userAux.last_name}`,
         email: userAux.email,   
-        role:userAux.role     
+        role:userAux.role,
+        cart:userAux.cart 
      }   
      done(null,userAux2);
     }))
@@ -73,13 +76,13 @@ const initializePassport = () =>{
         callbackURL:"http://localhost:4000/api/sessions/githubcallback"
     },async(accessToken,refreshToken,profile,done)=>{
         try {
-            console.log(profile)
+            
             
             const {name,login} = profile._json;
             let emailGitHub= `${login}@github.com`
-            console.log(emailGitHub);
+            
             const userAux = await userService.getUser({email:emailGitHub});
-            console.log(userAux)
+            
             if(!userAux){
                 const newUser = {
                     first_name:name,

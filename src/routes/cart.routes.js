@@ -4,6 +4,10 @@ import cartsController from "../controllers/carts.controller.js"
 
 const CartRouter = Router();
 
+CartRouter.post('/', cartsController.createCart)
+
+CartRouter.get('/:cid', cartsController.getCartsByID)
+
 // Ruta protegida por Passport: Obtener el carrito con todos los productos
 CartRouter.get("/", cartsController.getProductsCartApi);
 

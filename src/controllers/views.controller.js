@@ -1,4 +1,6 @@
 import { productService, cartsService } from "../services/index.js";
+import  jwt  from "jsonwebtoken";
+import config from "../config/config.js";
 
 // Ruta para renderizar la vista products.handlebars
 const mostrarProductos = async (req, res) => {
@@ -47,7 +49,23 @@ const profile = (req, res) => {
 };
 
 const panelAdmin = (req,res) =>{
-  res.render('panelAdmin', { css:'home' })
+  res.render('panelAdmin', { css:'home',  user: req.session.user })
+}
+
+const restoreRequest = (req,res) =>{
+  res.render('restoreRequest')
+}
+
+const restorePassword = (req,res) =>{
+  const {token} = req.query;
+  try{
+    const validToken = jwt.verify(token,config.jwt.SECRET)
+    res.render('restorePassword')
+  } 
+  catch(error){      
+     return res.render('invalidToken')    
+    }   
+ 
 }
 
 export default {
@@ -56,5 +74,7 @@ export default {
   register,
   login,
   profile,
-  panelAdmin
+  panelAdmin,
+  restoreRequest,
+  restorePassword
 };

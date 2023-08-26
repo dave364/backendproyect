@@ -19,7 +19,7 @@
 
         <input class="pages btn btn-sm btn-info"  type="submit">
     </form>
-
+    <p>Olvidaste tu contraseña ? puedes <a href="/restoreRequest">Restaurala aqui</a></p>
     <p>Tambien Puedes Ingresar Por Github</p>
     <a href="/api/sessions/github"><button class="pages btn btn-sm btn-info" >github</button></a>
 </div>
@@ -31,11 +31,12 @@
    {{#if user}}
     <div>
             <h1>Hola, {{user.name}}</h1>
-            <p>Correo: {{user.email}}</p>
-            <p>ID: {{user.id}} </p>
+            <p class="email" email={{user.email}}>Correo: {{user.email}}</p>
+            <p class="userID" id={{user.id}}>ID: {{user.id}} </p>
             <p>Role: {{user.role}}</p>
             <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
             <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
+            <button class="pages btn btn-sm btn-info changeRol">Presione aqui para cambiar el Role a Premium o a USER</button>
     </div>
    {{/if}}
   </div>

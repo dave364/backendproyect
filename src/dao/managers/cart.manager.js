@@ -1,8 +1,17 @@
 
 import  productModel  from "../model/Product.js";
-import { cartModel } from "../model/Cart.js";
+import  cartModel  from "../model/Cart.js";
+
 
 export default class CartsManager {
+
+  createCart = ()=>{
+    return  cartModel.create({"products":[]})
+} 
+
+getCartsByID = (params)=>{
+  return cartModel.findOne({'_id':params}).lean();
+}
 
  addProductCart = async (req, res) => {
   const { cid, pid } = req.params;

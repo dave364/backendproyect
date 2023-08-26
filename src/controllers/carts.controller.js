@@ -5,25 +5,38 @@ import ErrorService from "../services/ErrorService.js";
 import {productErrorNoExist} from "../constants/productErrors.js"
 import EErrors from "../constants/EErrors.js";
 
-export const addProductCart = async (req, res) => {
+  const createCart = async (req,res)=>{
+  await cartsService.createCart();
+  res.send({status:"success",message:"Cart added"})
+} 
+
+ const getCartsByID = async (req,res)=>{
+  const aux = await cartsService.getCartsByID(req.params.cid).populate('products.product');
+  if (!aux){
+     return res.send("el producto no existe");
+  }
+  return res.send(aux);
+}
+
+ const addProductCart = async (req, res) => {
   const { cartId, productId, quantity } = req.params;
   const result = await cartsService.addProductCart(cartId, productId, quantity);
   res.json({ message: result });
 };
 
-export const deleteAllProductsFromCart = async (req, res) => {
+ const deleteAllProductsFromCart = async (req, res) => {
   const { cartId } = req.params;
   const result = await cartsService.deleteAllProductsFromCart(cartId);
   res.json({ message: result });
 };
 
-export const deleteProductFromCart = async (req, res) => {
+ const deleteProductFromCart = async (req, res) => {
   const { cartId, productId } = req.params;
   const result = await cartsService.deleteProductFromCart(cartId, productId);
   res.json({ message: result });
 };
 
-export const getProductsCartApi = async (req, res, next) => {
+ const getProductsCartApi = async (req, res, next) => {
   try {
     const result = await cartsService.getProductsCartApi();
     res.json(result); // Responde con los productos del carrito
@@ -50,26 +63,26 @@ export const getProductsCartApi = async (req, res, next) => {
   }
 };
 
-export const getProductsCartView = async (req, res) => {
+ const getProductsCartView = async (req, res) => {
   const result = await cartsService.getProductsCartView();
   res.json(result);
 };
 
-export const updateCartProducts = async (req, res) => {
+ const updateCartProducts = async (req, res) => {
   const { cartId } = req.params;
   const { products } = req.body;
   const result = await cartsService.updateCartProducts(cartId, products);
   res.json(result);
 };
 
-export const updateProductQuantity = async (req, res) => {
+const updateProductQuantity = async (req, res) => {
   const { cartId, productId } = req.params;
   const { quantity } = req.body;
   const result = await cartsService.updateProductQuantity(cartId, productId, quantity);
   res.json(result);
 };
 
-export const FinalizarCompra = async (req,res) =>{
+const FinalizarCompra = async (req,res) =>{
   const CartId = await cartsService.getCartsByID(req.params.cid);
   if (!CartId){
       return res.send({status:"success",message:"no existe el carrito con los productos a comprar"})  
@@ -153,6 +166,8 @@ export const FinalizarCompra = async (req,res) =>{
 }
 
 export default {
+  getCartsByID,
+  createCart,
   addProductCart,
   deleteAllProductsFromCart,
   deleteProductFromCart,

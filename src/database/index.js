@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/*import mongoose from "mongoose";
 
 const MONGO_URL =
   "mongodb+srv://castrodavid9872:ItNaMTm4F5cwWs0v@cluster364da.jqgneo9.mongodb.net/?retryWrites=true&w=majority";
@@ -10,4 +10,4 @@ export const db = async () => {
     .catch((error) => console.error(error));
 };
 
-export default db;
+export default db;*/

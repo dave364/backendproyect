@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 
 const verProdHome = document.querySelector('#verProductsHome')
 
@@ -12,6 +13,12 @@ const botonFinalizar = document.querySelector('.finalizarCompra button')
 const botonVaciar = document.querySelector('.vaciarCarrito button');
 
 const spanVerCarrito = document.querySelector('.verCarrito Span')
+
+const emailUser = document.querySelector('.email')
+
+const changeRoleBoton = document.querySelector('.changeRol')
+
+const userID = document.querySelector('.userID')
 
 
 console.log(allBotonEliminar)
@@ -125,3 +132,25 @@ if (allBotonEliminar){
 
 })
 }
+
+if (changeRoleBoton){
+  changeRoleBoton.addEventListener('click',async (e)=>{
+    e.preventDefault();
+    console.log(userID)
+    const response = await fetch(`/api/users/premium/${userID.getAttribute("id")}`, {
+      method: 'PUT',
+      body:'',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+   });
+   const responseData = await response.json();
+   console.log(responseData);
+   Swal.fire('Se modifico el role del usuario , es necesesario Relogear para ver los cambios')
+         setTimeout(function() {
+          window.location.href = '/api/sessions/logout'
+        }, 2000);
+
+  })
+}
+});

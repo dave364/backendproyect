@@ -1,3 +1,6 @@
+import jwt from 'jsonwebtoken';
+import config from '../config/config.js';
+
 export const privacy = (privacyType) =>{
     return (req,res,next) => {
         const {user} = req.session;
@@ -38,4 +41,7 @@ export const authRoles = (role) =>{
     }
 }
 
+export const generateToken = (user , expiresIn='1d') =>{
+    return jwt.sign(user,config.jwt.SECRET,{expiresIn});
+}
 
