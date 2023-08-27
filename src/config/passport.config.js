@@ -21,7 +21,7 @@ const initializePassport = () =>{
             // si el usuario no existe , encriptamos la password
             const hasshedPassword = await createHash(password);
             //creamos el carrito
-            const nuevoCart = await cartService.createCart();
+            const nuevoCart = await cartsService.createCart();
             // num 3 construimos el usuario
 
             const userAux = {
@@ -35,6 +35,7 @@ const initializePassport = () =>{
             // si todo salio bien
             done(null,result);
         }catch(error){
+            console.log("initializePassport",error)
             done(error)
         }
     }))
