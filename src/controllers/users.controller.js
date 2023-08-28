@@ -84,7 +84,7 @@ const restoreRequest = async (req,res) =>{
 
     // ahora restaurar 
     
-    const restoreToken = generateToken(RestoreTokenDTO.getFrom(user),10)    
+    const restoreToken = generateToken(RestoreTokenDTO.getFrom(user),"10m")    
     const mailingService = new MailingService()      
     const result = await mailingService.sendMail(user.email,DTemplates.RESTORE,{restoreToken})    
     return res.send({status:"success"})
@@ -96,6 +96,10 @@ const restorePassword = async (req,res) =>{
     try{
         const tokenUser= jwt.verify(token,config.jwt.SECRET);
         const user = await userService.getUser({email: tokenUser.email})
+        if (!user) {
+            // Usuario no encontrado
+            return res.render('invalidToken');
+        }
         //verificar que la contraseña no sea la misma que ya tenemos 
         console.log(password)
         console.log(user)
@@ -106,7 +110,8 @@ const restorePassword = async (req,res) =>{
         }
         const newHashedPassword = await createHash(password)
         await userService.updateUser(user._id,{password:newHashedPassword})
-        return res.send({status:"success" ,message:"se cambio la contrseña"})
+        return  res.send({status:"success" ,message:"se cambio la contrseña"})
+        
     }
     catch(error){
         console.log(error)

@@ -101,7 +101,7 @@ const FinalizarCompra = async (req,res) =>{
                           const stockActualizado = product.stock - element.quantity;
                           await productService.updateProduct(element.product,{"stock":stockActualizado})
                           console.log(`${element.product}:`,true)                   
-                          const productoEliminado = await cartService.eliminarProductCart((req.params.cid),({"product":element.product}))     
+                          const productoEliminado = await cartsService.eliminarProductCart((req.params.cid),({"product":element.product}))     
                           console.log(productoEliminado)
                           console.log(product.price)
                           total = total + (element.quantity*product.price);
@@ -131,7 +131,7 @@ const FinalizarCompra = async (req,res) =>{
                                const nombresConcatenados = ArregloProdNoCompra.join(" ");   
       
                                const result = await transport.sendMail({
-                                  from:'Ecommerce Tuky <rodrigorainone@gmail.com>',
+                                  from:'Ecommerce Dave <catrodavid9872@gmail.com>',
                                   to:userEmail,
                                   subject:'Ticket de Compra',
                                   html:`
