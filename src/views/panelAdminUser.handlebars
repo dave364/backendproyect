@@ -1,0 +1,24 @@
+  <div>
+
+
+  
+  
+  {{#if users}}            
+            {{#each users}}
+                <div id="cart">
+                        <p><span class="keyDer"> ID : </span>{{this.id}}</p>
+                        <p><span class="keyDer"> Nombre : </span> {{this.name}}</p>
+                        <p><span class="keyDer"> Role : </span> {{this.role}}</p>
+                        <p><span class="keyDer"> Email: </span> {{this.email}}</p>  
+                        <button class="changeRol" idRole={{this.id}}>Presione aqui para cambiar el Role a Premium o a USER</button>                                            
+                        <button class="eliminar" idEliminar={{this.id}}>Eliminar User</button>                                        
+                </div>
+            {{/each}} 
+        {{/if}} 
+
+    
+  </div>
+
+
+
+  <script src="/js/panelAdminUser.js"></script>

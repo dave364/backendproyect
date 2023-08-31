@@ -118,6 +118,18 @@ const restorePassword = async (req,res) =>{
     }
 }
 
+const getUserAllDTO = async (req,res) =>{
+    const users = await userService.getUserAll();
+    const userDTO = users.map( user =>  new TokenDTO(user) )   
+    return res.send({status:"success",payload:userDTO})
+}
+
+const deleteUser = async (req,res) =>{
+    const idAux = req.params.uid;
+    const deleteUser = await userService.deleteUser(idAux)
+    return res.send({status:"success",message:"user borrado"})
+
+}
 
 export default {    
     register,
@@ -129,5 +141,7 @@ export default {
     current,
     changeRole,
     restoreRequest,
-    restorePassword
+    restorePassword,
+    getUserAllDTO,
+    deleteUser
 }

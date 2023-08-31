@@ -4,4 +4,6 @@
 {"level":"error","message":"This is a debug log message."}
 {"level":"fatal","message":"This is a debug log message."}
 {"code":1,"level":"error","name":"Error de creación de producto","status":400}
-{"code":1,"level":"error","name":"Error de creación de producto","status":400}
+{"code":1,"level":"error","name":"Error de creación de producto","status":400}{"level":"error"}
+{"level":"error"}
+{"level":"error"}

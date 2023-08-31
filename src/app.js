@@ -19,6 +19,8 @@ import './config.js'
 import nodemailer from 'nodemailer';
 import errorHandler from './middlewares/error.js'
 import attachLogger from './middlewares/logger.js'
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from 'swagger-ui-express'
 
 const app = express();
 
@@ -31,6 +33,21 @@ const PORT = process.env.PORT || 4000;
   console.log("Server funcionando en el puerto 4000");
   db();
 });*/
+
+const swaggerOptions = {
+  definition:{
+      openapi:'3.0.1',
+      info:{
+          title:"Documentacion Dave commerce ",
+          description:"documentacion para API principal de Dave commerce"
+      }
+  },
+  apis:[`${__dirname}/docs/**/*.yaml`]
+}
+
+const specs = swaggerJSDoc(swaggerOptions)
+
+app.use('/docs',swaggerUiExpress.serve,swaggerUiExpress.setup(specs))
 
 app.use(express.static(`${__dirname}/public`))
 app.use(express.json());

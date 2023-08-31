@@ -1,0 +1,131 @@
+paths:
+    /api/products:
+      get:
+          summary: Devuelve los productos creados hasta el momento
+          tags:
+             - Products     
+          responses:
+             "success":
+                description: Los productos se obtuvieron correctamente
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Product'
+             "error":
+                description: Los productos no se obtuvieron
+      post:
+          summary: Crea un nuevo producto
+          tags:
+             - Products 
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    price:
+                      type: number
+                    thumbnail:
+                      type: string
+                    code:
+                      type: string
+                    stock:
+                      type: number
+                    category: 
+                      type: string
+                    status: 
+                    type: boolean     
+    /api/products/{pid}:
+      get:
+        summary: obtiene el producto con el id proporcionado
+        tags:
+           - Products
+        parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id para obtener el producto
+          schema:
+            type: string
+        responses:
+          "200":
+            description: Producto obtenido correctamente
+          "400":
+            description: no encontrado
+      put:
+        summary: Actualiza un producto
+        tags:
+          - Products
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: id del producto a actualizar
+            schema:
+              type: string
+          # Puedes agregar otros parámetros si es necesario
+        responses:
+          "200":
+            description: Producto actualizado correctamente
+          "404":
+            description: Producto no encontrado
+      delete:
+        summary: Elimina un producto
+        tags:
+          - Products
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: id del producto a eliminar
+            schema:
+              type: string
+        responses:
+          "204":
+            description: Producto eliminado correctamente
+          "404":
+            description: Producto no encontrado
+      
+
+
+
+
+components: 
+  schemas:
+    Product:
+      type: object
+      properties: 
+        _id: 
+          type: string
+          format: uuid
+          description: ID del producto
+        title:
+          type: string
+          description: Título del producto        
+        price:         
+          type: number
+          description: Precio del producto   
+        thumbnail:
+          type: string
+          description: Enlace a la imagen del producto
+        code:
+          type: string
+          description: Código del producto
+        stock:
+          type: number
+          description: Stock del producto
+        category: 
+          type: string
+          description: Categoría del producto
+        status: 
+          type: boolean
+          description: true si está activo, false si no
+             
+
+
+

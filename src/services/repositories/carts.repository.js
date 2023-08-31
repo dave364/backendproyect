@@ -9,32 +9,24 @@ export default class CartsRepository {
     return this.dao.getCartsByID(params);
   }
 
-  addProductCart = ()=>{
-    return this.dao.addProductCart();
-  }
+  addProductCart = (idCart,producto)=>{
+    return this.dao.addProductCart(idCart,producto);
+}
 
-  deleteAllProductsFromCart= ()=>{
-    return this.dao.deleteAllProductsFromCart();
-  }
+deleteProductFromCart = (idCart,producto)=>{
+  return this.dao.deleteProductFromCart(idCart,producto);
+}
 
-   deleteProductFromCart= ()=>{
-    return this.dao.deleteProductFromCart();
-  }
+  deleteAllProductsFromCart= (idCart)=>{
+    return this.dao.deleteAllProductsFromCart(idCart)
+}
 
-   getProductsCartApi= ()=>{
-    return this.dao.getProductsCartApi();
-  }
+   updateCartProducts= (idCart,arregloProductos)=>{
+    return this.dao.updateCartProducts(idCart,arregloProductos);
+}
 
-   getProductsCartView = ()=>{
-    return this.dao.getProductsCartView();
-  }
-
-   updateCartProducts= ()=>{
-    return this.dao.updateCartProducts();
-  }
-
-   updateProductQuantity= ()=>{
-    return this.dao.updateProductQuantity();
-  }
+   updateProductQuantity= (idCart,producto)=>{
+    return this.dao.updateProductQuantity(idCart,producto);
+} 
 }
 

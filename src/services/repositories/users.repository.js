@@ -9,6 +9,10 @@ export default class UsersRepository {
         return this.dao.getUser(user);
     }
 
+    getUserAll = () =>{
+        return this.dao.getUserAll()
+     }
+
     updateUser = (id, user) => {
         return this.dao.updateUser(id,user);
       };

@@ -22,19 +22,16 @@ const mostrarProductos = async (req, res) => {
 };
 
 // Ruta para renderizar la vista cart.handlebars
-const getCarrito = async (req, res) => {
-  try {
-    const response = await cartsService.getProductsCartView();
-    const productsCart = response.productsCart;
-
-    console.log("Productos obtenidos del carrito:", productsCart); // Agrega este console.log
-
-    res.render("cart", { productsCart });
-  } catch (error) {
-    console.error("Error al obtener los productos del carrito:", error);
-    res.render("cart", { productsCart: [] });
-  }
-};
+const getCarrito = async (req,res) =>{
+  const carritoId = await cartsService.getCartsByID(req.params.cid).populate('products.product');;
+  
+  let total=0;
+  carritoId.products.forEach(element => {        
+      total= total + element.quantity*element.product.price;
+  });
+  
+  res.render('cart',{carritoId ,total,css:'home'})
+}
 
 const register = (req, res) => {
   res.render('register', { css: 'home' });
@@ -68,6 +65,12 @@ const restorePassword = (req,res) =>{
  
 }
 
+const panelAdminUser = async (req,res)=>{
+  const users = await userService.getUserAll();
+  const userDTO = users.map( user =>  new TokenDTO(user) ) 
+  res.render('panelAdminUser',{ users:userDTO, css:'home', user: req.session.user})
+}
+
 export default {
   mostrarProductos,
   getCarrito,
@@ -76,5 +79,6 @@ export default {
   profile,
   panelAdmin,
   restoreRequest,
-  restorePassword
+  restorePassword,
+  panelAdminUser
 };

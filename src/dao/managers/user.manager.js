@@ -14,6 +14,14 @@ export default class UserManager {
      updateUser = (id, user) => {
       return userModel.findByIdAndUpdate(id, { $set: user });
     };
+
+    getUserAll = () =>{
+      return userModel.find()
+   }
+
+   updateUser = (id, user) => {
+    return userModel.findByIdAndUpdate(id, { $set: user });
+  };
   
     deleteUser = (id) => {
       return userModel.findByIdAndDelete(id);

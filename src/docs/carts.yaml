@@ -1,0 +1,188 @@
+paths:
+  /api/carts:
+    post:
+      summary: Crea un nuevo carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carrito creado correctamente
+
+  /api/carts/{cid}:
+    get:
+      summary: Devuelve el carrito por id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito obtenido correctamente
+        "400":
+          description: No encontrado
+    put:
+      summary: Modifica los productos  del carrito por id
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Productos modificados correctamente
+        "400":
+          description: Carrito No encontrado
+    delete:
+      summary: Elimina todos los productos del carrito por id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Productos eliminados del carrito
+        "400":
+          description: No encontrado
+  /{cid}/product/{pid}:
+    post:
+      summary: Agrega el producto en el carrito
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: id para obtener el producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Productos modificados correctamente
+        "400":
+          description: Carrito No encontrado
+    delete:
+      summary: Elimina el producto del carrito por id 
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: id para obtener el producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Productos modificados correctamente
+        "400":
+          description: Carrito No encontrado
+    put:
+      summary: Modifica el quantity del producto
+      tags:
+        - Carts
+      requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    quantity:
+                      type: number                    
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: id para obtener el producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Productos modificados correctamente
+        "400":
+          description: Carrito No encontrado
+  /{cid}/purchase:
+    post:
+      summary: Finaliza la compra
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id para obtener el carrito
+          schema:
+            type: string        
+      responses:
+        "200":
+          description: Productos modificados correctamente
+        "400":
+          description: Carrito No encontrado
+
+
+
+
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties: 
+        _id: 
+          type: string
+          format: uuid
+          description: ID del Carrito
+        products:
+          type: array
+          description: Productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto en el carrito
+              quantity:
+                type: number
+                description: Cantidad del producto en el carrito
+
+    

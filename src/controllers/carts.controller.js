@@ -18,69 +18,76 @@ import EErrors from "../constants/EErrors.js";
   return res.send(aux);
 }
 
- const addProductCart = async (req, res) => {
-  const { cartId, productId, quantity } = req.params;
-  const result = await cartsService.addProductCart(cartId, productId, quantity);
-  res.json({ message: result });
-};
-
- const deleteAllProductsFromCart = async (req, res) => {
-  const { cartId } = req.params;
-  const result = await cartsService.deleteAllProductsFromCart(cartId);
-  res.json({ message: result });
-};
-
- const deleteProductFromCart = async (req, res) => {
-  const { cartId, productId } = req.params;
-  const result = await cartsService.deleteProductFromCart(cartId, productId);
-  res.json({ message: result });
-};
-
- const getProductsCartApi = async (req, res, next) => {
+ const addProductCart =  async (req,res,next)=>{
   try {
-    const result = await cartsService.getProductsCartApi();
-    res.json(result); // Responde con los productos del carrito
-
+      const ProductId = await productService.getProductsByID(req.params.pid);
+      
+   if (ProductId){
+       const mensaje = await cartsService.addProductCart((req.params.cid),({"product":req.params.pid,"quantity":req.body.quantity || 1}))             
+       return res.send({status:"success",message:mensaje})  
+   }
+   ErrorService.createError({
+      name:"Error de insercion del producto al carrito",
+      cause: productErrorNoExist(),
+      message: 'Error intentando insertar un  producto inexistente al carrito ',
+      code: EErrors.INVALID_TYPES,
+      status:400
+  })
+     
   } catch (error) {
-    console.error("Error al obtener los productos del carrito:", error);
-
-    // Si el error se debe a que el producto no existe, crea un error personalizado
-    if (productErrorNoExist()) {
-      const customError = {
-        name: "Error de inserción del producto al carrito",
-        cause: productErrorNoExist(),
-        message: 'Error intentando insertar un producto inexistente al carrito',
-        code: EErrors.INVALID_TYPES,
-        status: 400
-      };
-
-      // Pasa el error personalizado al siguiente middleware para el manejo de errores
-      next(customError);
-    } else {
-      // Si el error no es debido a la falta de producto, pasa el error original
-      next(error);
-    }
+      req.logger.error(error)
+      next(error);         
   }
-};
 
- const getProductsCartView = async (req, res) => {
-  const result = await cartsService.getProductsCartView();
-  res.json(result);
-};
+}
 
- const updateCartProducts = async (req, res) => {
-  const { cartId } = req.params;
-  const { products } = req.body;
-  const result = await cartsService.updateCartProducts(cartId, products);
-  res.json(result);
-};
+ const deleteAllProductsFromCart = async (req,res) =>{
+  const CartId = await cartsService.getCartsByID(req.params.cid);
+  if (!CartId){
+   return res.send({status:"success",message:"no existe el carrito con los productos a eliminar"})  
+  }
+  else{         
+       await cartsService.deleteAllProductsFromCart(req.params.cid);
+       return res.send({status:"success",message:"los productos fueron eliminados"})  
+  }
+}
 
-const updateProductQuantity = async (req, res) => {
-  const { cartId, productId } = req.params;
-  const { quantity } = req.body;
-  const result = await cartsService.updateProductQuantity(cartId, productId, quantity);
-  res.json(result);
-};
+ const deleteProductFromCart = async (req,res)=>{
+  const ProductId = await productService.getProductsByID(req.params.pid);
+  if (ProductId){
+      const mensaje = await cartsService.deleteProductFromCart((req.params.cid),({"product":req.params.pid}))             
+      return res.send({status:"success",message:mensaje})  
+  }
+  return res.send({status:"success",message:"Product no exist"}) 
+}
+
+
+ const updateCartProducts =  async (req,res) =>{
+  const CartId = await cartsService.getCartsByID(req.params.cid);
+  if (!CartId){
+   return res.send({status:"success",message:"no existe el carrito con los productos a modificar"})  
+  }
+  else{
+       const datos = req.body;
+       await cartsService.updateCartProducts(req.params.cid,datos);
+       return res.send({status:"success",message:"los productos fueron modificados"})  
+  }
+}
+
+const updateProductQuantity = async (req,res)=>{
+  const CartId = await cartsService.getCartsByID(req.params.cid);
+  if (!CartId){
+      return res.send({status:"no success",message:"el carrito no existe"})
+  }
+  else{   
+      const ProductId = await productService.getProductsByID(req.params.pid);       
+       if (ProductId){
+          const mensaje = await cartsService.updateProductQuantity((req.params.cid),({"product":req.params.pid,"quantity":req.body.quantity}))             
+          return res.send({status:"success",message:mensaje})  
+      }
+      return res.send({status:"no success",message:"Product no exist"}) 
+  }
+}
 
 const FinalizarCompra = async (req,res) =>{
   const CartId = await cartsService.getCartsByID(req.params.cid);
@@ -171,8 +178,6 @@ export default {
   addProductCart,
   deleteAllProductsFromCart,
   deleteProductFromCart,
-  getProductsCartApi,
-  getProductsCartView,
   updateCartProducts,
   updateProductQuantity,
   FinalizarCompra

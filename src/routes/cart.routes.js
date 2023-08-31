@@ -8,11 +8,8 @@ CartRouter.post('/', cartsController.createCart)
 
 CartRouter.get('/:cid', cartsController.getCartsByID)
 
-// Ruta protegida por Passport: Obtener el carrito con todos los productos
-CartRouter.get("/", cartsController.getProductsCartApi);
-
 // Ruta protegida por Passport: Agregar un producto al carrito
-CartRouter.post("/:cid/products-cart/:pid", cartsController.addProductCart);
+CartRouter.post("/:cid/product/:pid", cartsController.addProductCart);
 
 // Ruta protegida por Passport: Actualizar el carrito con un arreglo de productos
 CartRouter.put("/:cid", cartsController.updateCartProducts);
@@ -24,7 +21,7 @@ CartRouter.put("/:cid/products/:pid", cartsController.updateProductQuantity);
 CartRouter.delete("/:cid/products/:pid",  cartsController.deleteProductFromCart);
 
 // Ruta protegida por Passport: Eliminar todos los productos del carrito
-CartRouter.delete("/:cid/products", cartsController.deleteAllProductsFromCart);
+CartRouter.delete("/:cid", cartsController.deleteAllProductsFromCart);
 
 CartRouter.post('/:cid/purchase',  cartsController.FinalizarCompra)
 

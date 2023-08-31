@@ -1,39 +1,47 @@
 <!-- cart.handlebars -->
-<div class="page-nav d-flex justify-content-between align-items-center">
-  <button id="btnVolver" class="button-volver">Volver</button>
-  <h1 class="text-center">Carrito</h1>
-  <button id="btnFinalizar" class="button-finalizar">Finalizar compra</button>
-</div>
 
+{{#if carritoId}}
+<div class="page-nav d-flex justify-content-between align-items-center">
+     
+  <a href="/tienda"><button id="btnVolver" class="button-volver">Volver</button></a>
+  <h1 class="text-center">Carrito</h1>
+  <button id="btnFinalizar" class="finalizarCompra">Finalizar compra</button>
+
+</div>
 
 <div id="page-content" class="page-content">
   <div class="container ">
-{{#if productsCart.length}}
-  <div class="table table-dark" id="our-table">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Producto</th>
-          <th scope="col">Código de Referencia</th>
-          <th scope="col">Cantidad</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each productsCart}}
-          <tr>
-            <td>{{this.name}}</td>
-            <td>{{this._id}}</td>
-            <td>{{this.quantity}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    {{#if carritoId}} <!-- Añadir esta línea para controlar la visibilidad -->
+      <h1>Carrito</h1>
+      <div class="verCarrito">
+       <p><span id={{carritoId._id}} class="keyDer"> ID Carrito:</span>{{carritoId._id}}</p>
+      </div>
+      <div class="table table-dark" id="our-table">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Código de Referencia</th>
+                <th scope="col">Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each carritoId.products}}
+                <tr>
+                  <td>{{this.name}}</td>
+                  <td>{{this._id}}</td>
+                  <td>{{this.quantity}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+      </div>
+      <p>Total:${{total}} </p>
+   
   </div>
-  </div>
-{{else}}
-  <p class="alert alert-info">No hay productos en el carrito</p>
+   {{/if}}
+</div>
 {{/if}}
-
 
 
 
