@@ -11,6 +11,7 @@ import EErrors from "../constants/EErrors.js";
 } 
 
  const getCartsByID = async (req,res)=>{
+    console.log("Entrando a getCarrito");
   const aux = await cartsService.getCartsByID(req.params.cid).populate('products.product');
   if (!aux){
      return res.send("el producto no existe");

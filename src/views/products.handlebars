@@ -1,7 +1,7 @@
 <div class="page-nav">
    
   <h1>Mi tienda</h1>
-  <button id="checkout" class="button-checkout" onclick="redirectToCart()">Carrito</button>
+  <button id="checkout" class="button-checkout" onclick="redirectToCart('{{user.cart}}')">Carrito</button>
 </div>
 {{#unless user}}
 <div class="text-center">
@@ -138,8 +138,9 @@ function pageButtons(state, orderBy) { console.log("state",state, orderBy)
 </script>
 
 <script>
-function redirectToCart() {
-  window.location.href = "/carts/:cid";
+function redirectToCart(cartId) {
+  console.log('Redireccionando al carrito con ID:', cartId);
+  window.location.href = "/carts/${cartId}";
 }
 
 </script>
