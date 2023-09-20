@@ -9,3 +9,4 @@
 {"level":"error"}
 {"level":"error"}
 {"level":"error"}
+{"code":2,"level":"error","name":"Error de insercion del producto al carrito","status":400}

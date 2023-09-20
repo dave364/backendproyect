@@ -251,7 +251,13 @@ input {
     border: 2px solid #008CBA; /* Blue */
     transition-duration: 0.4s;
     margin-right: 10px; /* Agregamos margen para separar del título */
+    
   }
+
+  .button-volver:hover {
+    background-color: #008CBA; /* Blue */
+    color: white;
+}
   
   .button-finalizar {
     background-color: white;
@@ -259,6 +265,11 @@ input {
     border: 2px solid #008CBA; /* Blue */
     transition-duration: 0.4s;
   }
+
+  .button-finalizar:hover {
+    background-color: #008CBA; /* Blue */
+    color: white;
+}
 
   .divUsers{
     text-align: center;

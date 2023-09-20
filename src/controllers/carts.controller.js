@@ -90,7 +90,7 @@ const updateProductQuantity = async (req,res)=>{
 }
 
 const FinalizarCompra = async (req,res) =>{
-    const CartId = await cartService.getCartsByID(req.params.cid);
+    const CartId = await cartsService.getCartsByID(req.params.cid);
     console.log(`cantidad de productos en el cart+${CartId.products.length}`)
     if (!CartId){
         return res.send({status:"success",message:"no existe el carrito con los productos a comprar"})  
