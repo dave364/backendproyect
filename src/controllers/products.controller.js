@@ -36,8 +36,6 @@ const getProducts = async (req, res) => {
   try {
     const { page, orderBy } = req.query;
 
-    console.log("Page:", page);
-    console.log("OrderBy:", orderBy);
 
     const result = await productService.getProducts(page, orderBy);
     res.json(result);
@@ -73,7 +71,6 @@ const updateProduct =  async (req,res)=>{
 const deleteProduct =  async (req,res)=>{
   const idAux = req.params.pid;
   const borrado = await productService.deleteProduct(idAux)    
-  console.log()
   if (!borrado)  {
       return res.send({status:" no success"})
   }

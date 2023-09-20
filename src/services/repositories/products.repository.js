@@ -7,7 +7,6 @@ export default class ProductsRepository {
   }
 
   async getProducts(page, orderBy) {
-    console.log(page);
     return this.dao.getProducts(page, orderBy);
   }
 

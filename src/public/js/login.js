@@ -1,6 +1,6 @@
-const form = document.getElementById('loginForm');
+const form = document.getElementById('loginForm' );
 
-form.addEventListener('submit', async (event) => {
+document.addEventListener('submit', async (event) => {
   try {
     event.preventDefault();
     const data = new FormData(form);
@@ -14,7 +14,7 @@ form.addEventListener('submit', async (event) => {
       },
    });
    const responseData = await response.json();
-   console.log(responseData);
+   /*console.log(responseData);*/
    if (responseData.status=="success"){
 
       if (responseData.payload==="Admin"){

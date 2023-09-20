@@ -6,7 +6,6 @@ export default class CartsRepository {
         return this.dao.createCart();
   }
   getCartsByID= (params)=>{
-    console.log("Entrando a getCartsByID");
     return this.dao.getCartsByID(params);
   }
 

@@ -35,7 +35,7 @@ const initializePassport = () =>{
             // si todo salio bien
             done(null,result);
         }catch(error){
-            console.log("initializePassport",error)
+            /*console.log("initializePassport",error)*/
             done(error)
         }
     }))

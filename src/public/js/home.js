@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire('no puede agregar productos de su creacion al carrito')
           }
           else{
+            
             const response = await fetch(`/api/carts/${idCartUser.id}/product/${e.target.id}`, {
               method: 'POST',
               body:'',

@@ -1,7 +1,7 @@
 <div class="page-nav">
    
   <h1>Mi tienda</h1>
-  <button id="checkout" class="button-checkout" onclick="redirectToCart('{{user.cart}}')">Carrito</button>
+  <a href="/carts/{{user.cart}}"><button id="checkout" class="button-checkout">Carrito</button>
 </div>
 {{#unless user}}
 <div class="text-center">
@@ -41,7 +41,7 @@
    {{/if}}
   </div>
     <!-- Table structure here -->
-    <table class="table table-dark" id="our-table">
+    <table class= "table table-dark mostrarProductosCart" id="our-table">
       <thead>
         <tr>
           <th>Ref</th>
@@ -62,7 +62,6 @@
 
 <script>
   const deleteButton = (id) => {
-  console.log('deleteProducts', id);
   // Aquí puedes realizar alguna acción para eliminar el producto
 }
 
@@ -70,7 +69,6 @@ const getProduct = (page, orderBy) => {
   fetch(`/api/products?page=${page}&orderBy=${orderBy}`)
     .then(response => response.json())
     .then(data => {
-      console.log('Productos obtenidos:-', data);
       const tableBody = document.getElementById('table-body');
       tableBody.innerHTML = '';
 
@@ -84,7 +82,7 @@ const getProduct = (page, orderBy) => {
               <td>${product.name}</td>
               <td>${product.category}</td>
               <td>${product.price}</td>
-              <td><button class="pages btn btn-sm btn-info" onclick="addToCart('${product._id}')">Comprar</button></td>
+              <td><button class="pages btn btn-sm btn-info comprar-button" data-product-id="{{product._id}}">Comprar</button></td>
             </tr>
           `;
           tableBody.innerHTML += row;
@@ -137,13 +135,7 @@ function pageButtons(state, orderBy) { console.log("state",state, orderBy)
 
 </script>
 
-<script>
-function redirectToCart(cartId) {
-  console.log('Redireccionando al carrito con ID:', cartId);
-  window.location.href = "/carts/${cartId}";
-}
 
-</script>
 
 <script src="/js/home.js"></script>
 

@@ -8,15 +8,12 @@ const mostrarProductos = async (req, res) => {
     const page = req.query.page || 1;
     const orderBy = req.query.orderBy || 0;
 
-    console.log('page:', page, 'orderBy:', orderBy); // Agrega este console.log
 
     const products = await productService.getProducts(page, orderBy);
 
-    console.log('Productos obtenidos:', products); // Agrega este console.log
 
     res.render("products", { user: req.session.user, products });
   } catch (error) {
-    console.error("Error al obtener los productos:", error);
     res.render("products", { user: req.session.user, products: [] });
   }
 };
@@ -30,8 +27,9 @@ const getCarrito = async (req,res) =>{
       total= total + element.quantity*element.product.price;
   });
   
-  res.render('cart',{carritoId ,total,css:'home'})
+ res.render('cart',{carritoId ,total,css:'home'})
 }
+
 
 const register = (req, res) => {
   res.render('register', { css: 'home' });

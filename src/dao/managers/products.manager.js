@@ -14,7 +14,6 @@ addProduct = (product) => {
 
   getProducts = async (page, orderBy) => {
     try {
-      console.log('page:', page, 'orderBy:', orderBy, );
       const order = orderBy == 0 ? {} : { price: orderBy };
       const options = {
         page: parseInt(page),
@@ -33,6 +32,10 @@ addProduct = (product) => {
       //throw error;
     }
   };
+
+  getProductsBy = (params)=>{
+    return productModel.findOne(params);
+}
 
   updateProduct = (id,product)=>{
     const idValido = new mongoose.Types.ObjectId(id);

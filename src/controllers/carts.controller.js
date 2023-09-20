@@ -11,7 +11,6 @@ import EErrors from "../constants/EErrors.js";
 } 
 
  const getCartsByID = async (req,res)=>{
-    console.log("Entrando a getCarrito");
   const aux = await cartsService.getCartsByID(req.params.cid).populate('products.product');
   if (!aux){
      return res.send("el producto no existe");
@@ -103,33 +102,32 @@ const FinalizarCompra = async (req,res) =>{
               if  (CartId.products.length !== 0){                    
                   CartId.products.forEach(async (element) => {
               
-                      console.log(element.product)
+                      
                       const product = await productService.getProductsByID(element.product);               
                       if (product.stock >= element.quantity){
                           const stockActualizado = product.stock - element.quantity;
                           await productService.updateProduct(element.product,{"stock":stockActualizado})
-                          console.log(`${element.product}:`,true)                   
+                                         
                           const productoEliminado = await cartsService.eliminarProductCart((req.params.cid),({"product":element.product}))     
-                          console.log(productoEliminado)
-                          console.log(product.price)
+                          /*console.log(productoEliminado)*/
+                         
                           total = total + (element.quantity*product.price);
                           ArregloProdCompra.push(element.product)
                       }
                       else
                           {                        
-                              console.log(`${element.product}:`,false)  
+                              
                               ArregloProdNoCompra.push(element.product)
                               //aca el stock es insuficiente a la compra y deberia sacar el producto y ponerlo en un arreglo
                           }  
                       counter++;
                           if (counter === CartId.products.length) {
                            if (total !=0) {
-                              console.log(`el total es ${total}`);
-                              console.log(ArregloProdNoCompra)
+                             
                                 const user = await userService.getUser({cart:req.params.cid})
                                 const userEmail = user.email
                                 const code = uuidv4();
-                                console.log(code);
+                               
                                 const amount = total;
                                 const purchaser = userEmail;
                                 
