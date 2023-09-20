@@ -158,7 +158,7 @@ const deleteInactivity = async (req,res) =>{
             const deleteUser = await userService.deleteUser(element.id)
             console.log("Ha pasado al menos media hora entre las conexiones.");
             const result = await transport.sendMail({
-                from:'Ecommerce Tuky <rodrigorainone@gmail.com>',
+                from:'Ecommerce Dave <davidcastro9872@gmail.com>',
                 to:element.email,
                 subject:'Eliminacion de cuenta',
                 html:`

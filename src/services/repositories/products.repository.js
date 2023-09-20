@@ -2,12 +2,12 @@ export default class ProductsRepository {
   constructor(dao){
       this.dao =dao;
   }
-     addProduct(product) {
-    return this.dao.addProduct(product);
-  }
+  getProducts = (cantidad)=>{
+    return this.dao.getProducts(cantidad);
+}
 
-  getProducts(page, orderBy) {
-    return this.dao.getProducts(page, orderBy);
+  getProductsPaginate(page, orderBy) {
+    return this.dao.getProductsPaginate(page, orderBy);
   }
 
   getProductsBy = (params)=>{
@@ -16,6 +16,10 @@ export default class ProductsRepository {
 
 getProductsByID = (id)=>{
   return this.dao.getProductsByID(id);
+}
+
+createProduct = (product)=>{
+  return this.dao.createProduct(product);
 }
 
   updateProduct = (id,product)=>{

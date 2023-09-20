@@ -259,5 +259,32 @@ input {
     border: 2px solid #008CBA; /* Blue */
     transition-duration: 0.4s;
   }
+
+  .divUsers{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+#cartUser{    
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:flex ;
+    flex-direction: column;
+    background-color: white;
+    border:1px solid black;
+    border-radius: 15px;
+    width: 400px;
+    padding-left: 15px;
+    gap:10px;
+    text-align: left;
+   
+}
+
+#cartUser button{
+    width: 95%;
+}
   
 

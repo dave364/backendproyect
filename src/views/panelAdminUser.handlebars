@@ -1,11 +1,17 @@
+  <div class="text-center">
+  <h1 class="page-nav-login">Control de Usuarios</h1>
   <div>
+     <a class="eliminarTemporal"><button class="pages btn btn-sm btn-info" >Eliminar Users Temporales</button></a>
+  </div>
+  </div>
+  <div class="divUsers">
 
-
+     
   
   
   {{#if users}}            
             {{#each users}}
-                <div id="cart">
+                <div id="cartUser">
                         <p><span class="keyDer"> ID : </span>{{this.id}}</p>
                         <p><span class="keyDer"> Nombre : </span> {{this.name}}</p>
                         <p><span class="keyDer"> Role : </span> {{this.role}}</p>
@@ -18,6 +24,7 @@
 
     
   </div>
+  
 
 
 
