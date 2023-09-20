@@ -27,7 +27,7 @@ const app = express();
 app.use(attachLogger);
 
 const PORT = process.env.PORT || 4000;
- mongoose.connect("mongodb+srv://castrodavid9872:ItNaMTm4F5cwWs0v@cluster364da.jqgneo9.mongodb.net/?retryWrites=true&w=majority")
+ mongoose.connect(process.env.URL_MONGO)
  app.listen(PORT,()=>console.log(`listening puerto on ${PORT}`))
 /*app.listen(PORT, () => {
   console.log("Server funcionando en el puerto 4000");

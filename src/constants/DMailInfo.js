@@ -11,7 +11,7 @@ export default {
         ]
     },
     restore: {
-        subject:"Restaurar contrañeña",
+        subject:"Restaurar contraseña",
         attachments: [
             {
                 filename:'banner.png',

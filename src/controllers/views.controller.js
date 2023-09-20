@@ -1,5 +1,7 @@
 import { productService, cartsService } from "../services/index.js";
+import TokenDTO from "../dtos/user/TokenDTO.js";
 import  jwt  from "jsonwebtoken";
+import {userService } from "../services/index.js";
 import config from "../config/config.js";
 
 // Ruta para renderizar la vista products.handlebars
@@ -66,7 +68,10 @@ const restorePassword = (req,res) =>{
 const panelAdminUser = async (req,res)=>{
   const users = await userService.getUserAll();
   const userDTO = users.map( user =>  new TokenDTO(user) ) 
-  res.render('panelAdminUser',{ users:userDTO, css:'home', user: req.session.user})
+  res.render('panelAdminUser',{
+    users:userDTO,
+    css:'home'
+  })
 }
 
 export default {

@@ -37,6 +37,12 @@ addProduct = (product) => {
     return productModel.findOne(params);
 }
 
+getProductsByID =  (id)=>{
+  const idValido = new mongoose.Types.ObjectId(id);
+  return productModel.findOne({'_id':idValido});
+  
+} 
+
   updateProduct = (id,product)=>{
     const idValido = new mongoose.Types.ObjectId(id);
     return productModel.findByIdAndUpdate({'_id':idValido},{$set:product})

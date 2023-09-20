@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
     role:{
         type:String,
         default:'user'
+    },
+    last_connection:{
+        type: Date,
+        default: Date.now,
     }
 },{timestamps:true})
 

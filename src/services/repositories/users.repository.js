@@ -24,4 +24,8 @@ export default class UsersRepository {
     changeRole = (user)=>{
         return this.dao.changeRole(user);
     }
+
+    updateLastConnectionByEmail = (email) =>{
+        return this.dao.updateLastConnectionByEmail(email);
+    }
 }

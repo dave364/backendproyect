@@ -90,86 +90,89 @@ const updateProductQuantity = async (req,res)=>{
 }
 
 const FinalizarCompra = async (req,res) =>{
-  const CartId = await cartsService.getCartsByID(req.params.cid);
-  if (!CartId){
-      return res.send({status:"success",message:"no existe el carrito con los productos a comprar"})  
-     }
-  else{         
-              let counter = 0 ; 
-              let total = 0;
-              const ArregloProdNoCompra = []    
-              const ArregloProdCompra = []            
-              if  (CartId.products.length !== 0){                    
-                  CartId.products.forEach(async (element) => {
-              
-                      
-                      const product = await productService.getProductsByID(element.product);               
-                      if (product.stock >= element.quantity){
-                          const stockActualizado = product.stock - element.quantity;
-                          await productService.updateProduct(element.product,{"stock":stockActualizado})
-                                         
-                          const productoEliminado = await cartsService.eliminarProductCart((req.params.cid),({"product":element.product}))     
-                          /*console.log(productoEliminado)*/
-                         
-                          total = total + (element.quantity*product.price);
-                          ArregloProdCompra.push(element.product)
-                      }
-                      else
-                          {                        
-                              
-                              ArregloProdNoCompra.push(element.product)
-                              //aca el stock es insuficiente a la compra y deberia sacar el producto y ponerlo en un arreglo
-                          }  
-                      counter++;
-                          if (counter === CartId.products.length) {
-                           if (total !=0) {
-                             
-                                const user = await userService.getUser({cart:req.params.cid})
-                                const userEmail = user.email
-                                const code = uuidv4();
-                               
-                                const amount = total;
-                                const purchaser = userEmail;
-                                
-                               await ticketService.createTicket({code,amount,purchaser});
-      
-                               const nombresConcatenadosComprados = ArregloProdCompra.join(" ");
-                               const nombresConcatenados = ArregloProdNoCompra.join(" ");   
-      
-                               const result = await transport.sendMail({
-                                  from:'Ecommerce Dave <catrodavid9872@gmail.com>',
-                                  to:userEmail,
-                                  subject:'Ticket de Compra',
-                                  html:`
-                                  <div>
-                                      <h1>Hola, su compla fue completada</h1>
-                                      <p>Precio total:${amount}</p>
-                                      
-                                      <h2>los Productos que si se pudieron comprar fueron : ${nombresConcatenadosComprados}</h2>
-                                      <h2>los Productos que no se pudieron comprar fueron : ${nombresConcatenados}</h2>
-      
-                                  </div>
-                                  `                            
-                               })
-                               return res.send({ status: "success", message: "se finalizo la compra" ,payload:nombresConcatenados});
-                           }   
-                           else {
-                              const nombresConcatenados = ArregloProdNoCompra.join(" ");   
-                              return res.send({ status: "no success", message: "no tiene productos para finalizar la compra",payload:nombresConcatenados });
-                           }                    
-                            
-                          }            
-                  }); 
-              }
-              else {
-                  return res.send({ status: "no success", message: "no tiene productos para finalizar la compra",payload:"" });
-              }
-                       
-          
-     }
-  
+    const CartId = await cartService.getCartsByID(req.params.cid);
+    console.log(`cantidad de productos en el cart+${CartId.products.length}`)
+    if (!CartId){
+        return res.send({status:"success",message:"no existe el carrito con los productos a comprar"})  
+       }
+    else{         
+                let counter = 0 ; 
+                let total = 0;
+                const ArregloProdNoCompra = []    
+                const ArregloProdCompra = []            
+                if  (CartId.products.length !== 0){                    
+                    CartId.products.forEach(async (element) => {
+                
+                        console.log(element)
+                        const product = await productService.getProductsByID(element.product);                         
+                        if (product){
+                            if (product.stock >= element.quantity){
+                                const stockActualizado = product.stock - element.quantity;
+                                await productService.updateProduct(element.product,{"stock":stockActualizado})
+                                req.logger.debug(`${element.product}:`,true)                   
+                                const productoEliminado = await cartService.eliminarProductCart((req.params.cid),({"product":element.product}))     
+                                req.logger.debug(productoEliminado)
+                                req.logger.debug(product.price)
+                                total = total + (element.quantity*product.price);
+                                ArregloProdCompra.push(element.product)
+                            }
+                            else
+                                {                        
+                                    req.logger.debug(`${element.product}:`,false)  
+                                    ArregloProdNoCompra.push(element.product)
+                                    //aca el stock es insuficiente a la compra y deberia sacar el producto y ponerlo en un arreglo
+                                } 
+                        }                         
+                        counter++;
 
-}
+                            if (counter === CartId.products.length) {
+                             if (total !=0) {
+                                req.logger.debug(`el total es ${total}`);                                
+                                  const user = await userService.getUser({cart:req.params.cid})
+                                  const userEmail = user.email
+                                  const code = uuidv4();                                  
+                                  const amount = total;
+                                  const purchaser = userEmail;
+                                  
+                                 await ticketService.createTicket({code,amount,purchaser});
+        
+                                 const nombresConcatenadosComprados = ArregloProdCompra.join(" ");
+                                 const nombresConcatenados = ArregloProdNoCompra.join(" ");   
+        
+                                 const result = await transport.sendMail({
+                                    from:'Ecommerce Dave <catrodavid9872@gmail.com>',
+                                    to:userEmail,
+                                    subject:'Ticket de Compra',
+                                    html:`
+                                    <div>
+                                        <h1>Hola, su compla fue completada</h1>
+                                        <p>Precio total:${amount}</p>
+                                        
+                                        <h2>los Productos que si se pudieron comprar fueron : ${nombresConcatenadosComprados}</h2>
+                                        <h2>los Productos que no se pudieron comprar fueron : ${nombresConcatenados}</h2>
+        
+                                    </div>
+                                    `                            
+                                 })
+                                 return res.send({ status: "success", message: "se finalizo la compra" ,payload:nombresConcatenados});
+                             }   
+                             else {
+                                const nombresConcatenados = ArregloProdNoCompra.join(" ");   
+                                return res.send({ status: "no success", message: "no tiene productos para finalizar la compra",payload:nombresConcatenados });
+                             }                    
+                              
+                            }            
+                    }); 
+                }
+                else {
+                    return res.send({ status: "no success", message: "no tiene productos para finalizar la compra",payload:"" });
+                }
+                         
+            
+       }
+    
+
+ }
 
 export default {
   getCartsByID,

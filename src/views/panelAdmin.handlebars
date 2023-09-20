@@ -1,4 +1,8 @@
-<div class="container">
+
+<div class="text-center">
+<div class="tituloadmin">
+    <h1 class="page-nav-login">Sesión Admin</h1>
+    <div class="container">
     <h1>Hola {{user.name}}</h1>
     <div class="RoleDiv">
         
@@ -7,12 +11,8 @@
     <div class="EmailDiv">        
         <h2 class={{user.email}}>Email:{{user.email}}</h2>
     </div>
-    <h2>email:</h2>   
-    <a href="/api/sessions/logout"><button>Salir</button></a>
-<div class="text-center">
-<div class="tituloadmin">
-    <h1 class="page-nav-login">Sesión Admin</h1>
     <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
+    <a href="/panelAdminUser"><button class="profile-button btn btn-sm btn-info">Editar usuarios</button></a>
     </div>
 </div>
     <div class="mt-4 formConteiner">

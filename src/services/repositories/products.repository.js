@@ -6,12 +6,16 @@ export default class ProductsRepository {
     return this.dao.addProduct(product);
   }
 
-  async getProducts(page, orderBy) {
+  getProducts(page, orderBy) {
     return this.dao.getProducts(page, orderBy);
   }
 
   getProductsBy = (params)=>{
     return this.dao.getProductsBy(params);
+}
+
+getProductsByID = (id)=>{
+  return this.dao.getProductsByID(id);
 }
 
   updateProduct = (id,product)=>{

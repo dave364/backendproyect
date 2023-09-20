@@ -27,6 +27,11 @@ export default class UserManager {
       return userModel.findByIdAndDelete(id);
     };
 
+    updateLastConnectionByEmail =  (email) =>{
+      return  userModel.findOneAndUpdate({ email: email },{ $set: { last_connection: new Date() } })
+
+    }
+
      changeRole = async (user) => {
       const idValido = new mongoose.Types.ObjectId(user);
        let userBuscado = await userModel.findOne(idValido);

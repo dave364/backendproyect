@@ -24,7 +24,7 @@ const login =async (req,res)=>{
 
     req.session.user = new TokenDTO({name:req.user.name,email:req.user.email,role:req.user.role,id:req.user.id,cart:req.user.cart})   
 
-        
+    await userService.updateLastConnectionByEmail(req.session.user.email)  // pone el el horario de conexion mas reciente  
 
      return res.status(200).send({status:"success",payload:req.session.user.name});
 }
@@ -131,6 +131,54 @@ const deleteUser = async (req,res) =>{
 
 }
 
+const deleteInactivity = async (req,res) =>{
+    const AlluserAux = await userService.getUserAll();    
+    AlluserAux.forEach(async (element) => {
+        //console.log(element)
+        const currentConnectionTime = new Date();
+        const fechaUserLast = new Date(element.last_connection);        
+        console.log(element.email)
+        console.log(element.id)
+        
+        const timeDifferenceInMilliseconds = currentConnectionTime - fechaUserLast;
+
+        console.log(`esta es la resta ${timeDifferenceInMilliseconds}`)
+
+        console.log(`hora actual:${currentConnectionTime}`)
+        console.log(`hora usuario ultima coneccion :${fechaUserLast}`)
+
+        // Convierte la diferencia en milisegundos a horas
+        const timeDifferenceInHours = timeDifferenceInMilliseconds / (1000 * 60 * 60);
+
+        // Define el intervalo de tiempo deseado (media hora en horas)
+        const halfHourInHours = 0.5;
+
+        // Compara la diferencia de tiempo con el intervalo deseado
+        if (timeDifferenceInHours >= halfHourInHours) {
+            const deleteUser = await userService.deleteUser(element.id)
+            console.log("Ha pasado al menos media hora entre las conexiones.");
+            const result = await transport.sendMail({
+                from:'Ecommerce Tuky <rodrigorainone@gmail.com>',
+                to:element.email,
+                subject:'Eliminacion de cuenta',
+                html:`
+                <div>
+                    <h1>Hola, su cuenta fue eliminada por inactividad</h1>                    
+
+                </div>
+                `                            
+             })
+        } else {
+            console.log("No ha pasado media hora entre las conexiones.");
+        }
+
+
+
+
+    });
+    return res.send({status:"success"})
+}
+
 export default {    
     register,
     registerFall,
@@ -143,5 +191,6 @@ export default {
     restoreRequest,
     restorePassword,
     getUserAllDTO,
-    deleteUser
+    deleteUser,
+    deleteInactivity
 }
