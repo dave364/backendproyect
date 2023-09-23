@@ -1,4 +1,4 @@
-import LoggerService from "../services/LoggerService.js";
+import LoggerService from "../services/logger.service.js";
 
 const logger = new LoggerService(process.env.LOGGER)
 

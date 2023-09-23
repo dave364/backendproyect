@@ -1,9 +1,14 @@
 export const productErrorIncompleteValues = (product) =>{
     return `Uno o más parámetros obligatorios no fueron proporcionados:
     Propiedades obligatorias:
-    * name: se esperaba una cadena definida, y se recibió ${product.name};
+    * title: se esperaba una cadena definida, y se recibió ${product.title};
+    * description: se esperaba una cadena definida, y se recibió ${product.description};
     * price: se esperaba una cadena definida, y se recibió ${product.price};
-    * category: se esperaba una cadena definida, y se recibió ${product.category};  
+    * thumbnail: se esperaba una cadena definida, y se recibió ${product.thumbnail}; 
+    * code: se esperaba una cadena definida, y se recibió ${product.code};
+    * stock: se esperaba una cadena definida, y se recibió ${product.stock};
+    * category: se esperaba una cadena definida, y se recibió ${product.category};
+    * status: se esperaba una cadena definida, y se recibió ${product.status};   
     `
 }
 

@@ -13,8 +13,8 @@ import * as path from "path";
 import ProductRouter from "./routes/product.routes.js";
 import CartRouter from "./routes/cart.routes.js";
 import ViewsRouter from "./routes/views.routes.js";
-import sessionsRouter from "./routes/session.router.js"
-import usersRouter from "./routes/users.router.js"
+import sessionsRouter from "./routes/session.routes.js"
+import usersRouter from "./routes/users.routes.js"
 import './config.js'
 import nodemailer from 'nodemailer';
 import errorHandler from './middlewares/error.js'

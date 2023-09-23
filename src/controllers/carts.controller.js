@@ -1,7 +1,7 @@
-import {cartsService,productService,userService,ticketService} from "../services/index.js";
+import {cartsService,productService,userService,ticketService} from "../services/index.service.js";
 import { v4 as uuidv4 } from 'uuid';
 import { transport } from "../app.js";
-import ErrorService from "../services/ErrorService.js";
+import ErrorService from "../services/error.service.js";
 import {productErrorNoExist} from "../constants/productErrors.js"
 import EErrors from "../constants/EErrors.js";
 

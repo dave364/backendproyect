@@ -1,7 +1,7 @@
-import { productService, cartsService } from "../services/index.js";
+import { productService, cartsService } from "../services/index.service.js";
 import TokenDTO from "../dtos/user/TokenDTO.js";
 import  jwt  from "jsonwebtoken";
-import {userService } from "../services/index.js";
+import {userService } from "../services/index.service.js";
 import config from "../config/config.js";
 
 // Ruta para renderizar la vista products.handlebars

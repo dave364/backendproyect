@@ -5,7 +5,7 @@
      
   <a href="/tienda"><button id="btnVolver" class="button-volver btn">Volver</button></a>
   <h1 class="text-center">Carrito</h1>
-  <div class="finalizarCompra">
+  <div class="FinalizarCompra">
                         <button class="button-finalizar btn">Finalizar Compra</button>                  
                     </div>
 
@@ -14,7 +14,7 @@
 <div id="page-content" class="page-content">
   <div class="container ">
     {{#if carritoId}} <!-- Añadir esta línea para controlar la visibilidad -->
-      <h1>Carrito</h1>
+      
       <div class="verCarrito">
        <p><span id={{carritoId._id}} class="keyDer"> ID Carrito:</span>{{carritoId._id}}</p>
       </div>
@@ -30,7 +30,7 @@
             <tbody>
               {{#each carritoId.products}}
                 <tr>
-                  <td>{{this.name}}</td>
+                  <td>{{this.title}}</td>
                   <td>{{this._id}}</td>
                   <td>{{this.quantity}}</td>
                   <td class="vaciarCarrito">

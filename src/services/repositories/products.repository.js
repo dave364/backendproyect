@@ -18,8 +18,8 @@ getProductsByID = (id)=>{
   return this.dao.getProductsByID(id);
 }
 
-createProduct = (product)=>{
-  return this.dao.createProduct(product);
+addProduct = (product)=>{
+  return this.dao.addProduct(product);
 }
 
   updateProduct = (id,product)=>{

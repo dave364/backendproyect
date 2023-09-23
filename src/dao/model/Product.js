@@ -4,10 +4,14 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 const collection = "products";
 
 const schema = new mongoose.Schema({
-    name:String,
+    title:String,
+    description:String,
     price:Number,
+    thumbnail:Array,
+    code:String,
+    stock:Number,
     category:String,
-    InCart:Boolean,
+    status:Boolean,
     owner:{
         type:String,
         default:'admin'

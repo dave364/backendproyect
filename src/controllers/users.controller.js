@@ -1,9 +1,9 @@
 import TokenDTO from "../dtos/user/TokenDTO.js";
-import {userService } from "../services/index.js";
+import {userService } from "../services/index.service.js";
 import {generateToken} from "../middlewares/auth.js"
 import RestoreTokenDTO from "../dtos/user/RestoreTokenDTO.js";
 import DTemplates from "../constants/DTemplates.js";
-import MailingService from "../services/MailingService.js";
+import MailingService from "../services/mailing.service.js";
 import  jwt  from "jsonwebtoken";
 import { createHash, validatePassword } from "../utils.js";
 import config from "../config/config.js";

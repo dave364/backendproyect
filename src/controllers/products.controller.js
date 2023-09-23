@@ -1,5 +1,5 @@
-import {productService} from "../services/index.js";
-import ErrorService from "../services/ErrorService.js";
+import {productService} from "../services/index.service.js";
+import ErrorService from "../services/error.service.js";
 import {productErrorIncompleteValues} from "../constants/productErrors.js"
 import EErrors from "../constants/EErrors.js";
 import { tr } from "@faker-js/faker";
@@ -11,8 +11,8 @@ const addProduct = async (req,res,next)=>{
       
       datos.price =  parseFloat(datos.price);
       datos.stock = parseInt(datos.stock)
-      const { name, description, price, thumbnail=[], code, stock,category, status ,owner } = datos        
-
+      const { title, description, price, thumbnail=[], code, stock,category, status ,owner } = datos        
+console.log(datos);
   
   if (!owner){         
       datos.owner="admin"
@@ -27,7 +27,7 @@ const addProduct = async (req,res,next)=>{
  }  
 
  
-  if (name && description && price  && code && stock && category && datos.owner  && typeof datos.price === 'number' && typeof datos.stock === 'number' && boolOk == true ){
+  if (title && description && price  && code && stock && category && datos.owner  && typeof datos.price === 'number' && typeof datos.stock === 'number' && boolOk == true ){
       await productService.addProduct(datos) 
       return res.send({status:"success"}) 
   }
@@ -127,7 +127,7 @@ const deleteProduct =  async (req,res)=>{
       if (borrado.owner !== 'admin'){
           if(req.session.user.name=='Admin'){
               const result = await transport.sendMail({
-                  from:'Ecommerce Tuky <rodrigorainone@gmail.com>',
+                  from:'Ecommerce Dave <davidcastro9872@gmail.com>',
                   to:borrado.owner,
                   subject:'Producto eliminado',
                   html:`
