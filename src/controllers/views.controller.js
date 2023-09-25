@@ -26,7 +26,9 @@ const getCarrito = async (req,res) =>{
   
   let total=0;
   carritoId.products.forEach(element => {        
-      total= total + element.quantity*element.product.price;
+    if (element && element.product && element.product.price) {
+      total = total + element.quantity * element.product.price;
+    }
   });
   
  res.render('cart',{carritoId ,total,css:'home'})

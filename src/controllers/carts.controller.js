@@ -110,7 +110,7 @@ const FinalizarCompra = async (req,res) =>{
                                 const stockActualizado = product.stock - element.quantity;
                                 await productService.updateProduct(element.product,{"stock":stockActualizado})
                                 req.logger.debug(`${element.product}:`,true)                   
-                                const productoEliminado = await cartService.eliminarProductCart((req.params.cid),({"product":element.product}))     
+                                const productoEliminado = await cartsService.deleteProductFromCart((req.params.cid),({"product":element.product}))     
                                 req.logger.debug(productoEliminado)
                                 req.logger.debug(product.price)
                                 total = total + (element.quantity*product.price);
@@ -145,7 +145,7 @@ const FinalizarCompra = async (req,res) =>{
                                     subject:'Ticket de Compra',
                                     html:`
                                     <div>
-                                        <h1>Hola, su compla fue completada</h1>
+                                        <h1>Hola, su compra fue completada</h1>
                                         <p>Precio total:${amount}</p>
                                         
                                         <h2>los Productos que si se pudieron comprar fueron : ${nombresConcatenadosComprados}</h2>

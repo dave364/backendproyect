@@ -24,14 +24,16 @@
               <tr>
                 <th scope="col">Producto</th>
                 <th scope="col">Código de Referencia</th>
+                <th scope="col">imagen</th>
                 <th scope="col">Cantidad</th>
               </tr>
             </thead>
             <tbody>
               {{#each carritoId.products}}
                 <tr>
-                  <td>{{this.title}}</td>
+                  <td>{{this.product.title}}</td>
                   <td>{{this._id}}</td>
+                  <td><img class="cartIMG" src={{this.product.thumbnail}} alt="img"></td>
                   <td>{{this.quantity}}</td>
                   <td class="vaciarCarrito">
                          <button class="pages btn btn-sm btn-info" >eliminar</button></td> 

@@ -7,7 +7,7 @@ const ViewsRouter = Router();
 
 // Ruta para renderizar la vista products.handlebars
 ViewsRouter.get("/",privacy('PRIVATED'),handlePolicies(['USER','PREMIUM']),viewsController.mostrarProductos)
-
+//ViewsRouter.get("/one",privacy('NO_AUTHENTICATED'),viewsController.mostrarProductos)//
 // Ruta para renderizar la vista cart.handlebars
 ViewsRouter.get("/carts/:cid", privacy('PRIVATED'),handlePolicies(['USER',"PREMIUM"]),viewsController.getCarrito)
 

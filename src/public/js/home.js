@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (botonFinalizar){
     botonFinalizar.addEventListener('click',async (e)=>{
       e.preventDefault();
-      console.log(e.target.id);
+      console.log(botonFinalizar, "compro?");
       const response = await fetch(`/api/carts/${spanVerCarrito.id}/purchase`, {
         method: 'POST',
         body:'',
