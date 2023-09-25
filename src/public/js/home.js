@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (botonFinalizar){
     botonFinalizar.addEventListener('click',async (e)=>{
       e.preventDefault();
-      console.log(botonFinalizar, "compro?");
+      console.log(e.target.id);
       const response = await fetch(`/api/carts/${spanVerCarrito.id}/purchase`, {
         method: 'POST',
         body:'',
@@ -135,29 +135,31 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
   
-  if (allBotonEliminar){
-    allBotonEliminar.forEach( async (boton)=>{
-      boton.addEventListener('click', async (e)=>{
-          e.preventDefault();
-          console.log(e.target.id);
-          const response = await fetch(`/api/carts/${spanVerCarrito.id}/products/${e.target.id}`, {
-              method: 'DELETE',
-              body:'',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-           });
-           const responseData = await response.json();
-           console.log(responseData);
-           Swal.fire('Se elimino el producto en el  carrito')
-           setTimeout(function() {
-            window.location.reload();
-          }, 500);
-           
+  if (allBotonEliminar) {
+    allBotonEliminar.forEach(async (boton) => {
+      boton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        console.log(e.target.id);
+        const response = await fetch(`/api/carts/${spanVerCarrito.id}/products/${e.target.id}`, {
+          method: 'DELETE',
+          body: '',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const responseData = await response.json();
+        console.log(responseData);
+        Swal.fire('Se eliminó un producto del carrito'); // Mensaje modificado
+        setTimeout(function () {
+          window.location.reload();
+        }, 500);
+  
       })
   
-  })
+    })
   }
+  
+
   
   if (changeRoleBoton){
     changeRoleBoton.addEventListener('click',async (e)=>{
@@ -179,9 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }});
 
-  const deleteButton = (id) => {
-    // Aquí puedes realizar alguna acción para eliminar el producto
-  }
+
   
   const getProduct = (page, orderBy) => {
     fetch(`/api/products?page=${page}&orderBy=${orderBy}`)
@@ -195,14 +195,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
           productList.forEach(product => {
             const row = `
-              <tr>
+              <tr class="mostrarProductosCart">
                 <td>${product._id}</td>
                 <td>${product.title}</td>
                 <td>${product.category}</td>
                 <td>${product.stock}</td>
                 <td><img class="cartIMG" src=${product.thumbnail} alt="img"></td>
                 <td>${product.price}</td>
-                <td><button class="pages btn btn-sm btn-info comprar-button" data-product-id="{{product._id}}">Comprar</button></td>
+                <td><button class="pages btn btn-sm btn-info " id=${product._id}>Comprar</button></td>
               </tr>
             `;
             tableBody.innerHTML += row;

@@ -5,7 +5,7 @@
      
   <a href="/tienda"><button id="btnVolver" class="button-volver btn">Volver</button></a>
   <h1 class="text-center">Carrito</h1>
-  <div class="FinalizarCompra">
+  <div class="finalizarCompra">
                         <button class="button-finalizar btn">Finalizar Compra</button>                  
                     </div>
 
@@ -35,8 +35,8 @@
                   <td>{{this._id}}</td>
                   <td><img class="cartIMG" src={{this.product.thumbnail}} alt="img"></td>
                   <td>{{this.quantity}}</td>
-                  <td class="vaciarCarrito">
-                         <button class="pages btn btn-sm btn-info" >eliminar</button></td> 
+                  <td class="eliminarProducto">
+                         <button id={{this.product._id}} class="pages btn btn-sm btn-info" >eliminar</button></td> 
                 </tr>
               {{/each}}
             </tbody>
