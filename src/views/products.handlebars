@@ -36,7 +36,7 @@
             <p>Role: {{user.role}}</p>
             <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
             <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
-            <button class="pages btn btn-sm btn-info changeRol">Presione aqui para cambiar el Role a Premium o a USER</button>
+            
     </div>
    {{/if}}
   </div>
@@ -68,7 +68,75 @@
 
 
 
-
+<script>
+    const getProduct = (page, orderBy) => {
+    fetch(`/api/products?page=${page}&orderBy=${orderBy}`)
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = '';
+  
+        if (Array.isArray(data.payload.docs)) {
+          const productList = data.payload.docs;
+  
+          productList.forEach(product => {
+            const row = `
+              <tr class="mostrarProductosCart">
+                <td>${product._id}</td>
+                <td>${product.title}</td>
+                <td>${product.category}</td>
+                <td>${product.stock}</td>
+                <td><img class="cartIMG" src=${product.thumbnail} alt="img"></td>
+                <td>${product.price}</td>
+                <td><button class="pages btn btn-sm btn-info " id=${product._id}>Comprar</button></td>
+              </tr>
+            `;
+            tableBody.innerHTML += row;
+          });
+        } else {
+          console.log('La propiedad "docs" no existe o no es un array');
+        }
+  
+        pageButtons(data.payload, orderBy);
+      })
+      .catch(error => {
+        console.log('Error al obtener los productos:', error);
+      });
+  }
+  
+  
+  
+  // Llama a la función getProduct inicialmente para mostrar los productos
+  getProduct(1,0);
+  
+  function pageButtons(state, orderBy) { console.log("state",state, orderBy)
+    var wrapper = document.getElementById('pagination-wrapper');
+    wrapper.innerHTML = '';
+  
+    for (let page = 1; page <= state.totalPages; page++) {
+      wrapper.innerHTML += `<button value=${page} class="page btn btn-sm btn-info" style=${page == state.page ? 'color:black;' : null}>${page}</button>`;
+    }
+  
+    if (state.hasPrevPage) {
+      wrapper.innerHTML = `<button value=${state.prevPage} class="page btn btn-sm btn-info">&#171; First</button>` + wrapper.innerHTML;
+    }
+  
+    if (state.hasNextPage) {
+      wrapper.innerHTML += `<button value=${state.nextPage} class="page btn btn-sm btn-info">Last &#187;</button>`;
+    }
+  
+    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, 0)">Limpiar</button>`;
+    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, -1)">Mayor precio</button>`;
+    wrapper.innerHTML += `<button class="pages btn btn-sm btn-info" onclick="getProduct(0, 1)">Menor precio</button>`;
+  
+    $('.page').on('click', function() { 
+      const page = Number($(this).val());
+      getProduct(page, orderBy);
+    });
+  }
+  
+    pageButtons(state);
+</script>
 
 <script src="/js/home.js"></script>
 

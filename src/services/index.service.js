@@ -1,8 +1,8 @@
 import PersistenceFactory from "../dao/factory.js"
-import usersRepository from "./repositories/users.repository.js"
-import cartsRepository from "./repositories/carts.repository.js"
-import productsRepository from "./repositories/products.repository.js";
-import ticketsRepository from "./repositories/ticket.repository.js"
+import usersRepository from "../repositories/users.repository.js"
+import cartsRepository from "../repositories/carts.repository.js"
+import productsRepository from "../repositories/products.repository.js";
+import ticketsRepository from "../repositories/ticket.repository.js"
 
 
 

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "mocha **/*.test.js",
     "dev": "nodemon src/app.js",
@@ -12,6 +11,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
+  "engines":{
+    "node":">=14 <17"
+  },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
     "artillery": "^2.0.0-35",
