@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.reload();
         }, 500);
   
+        
       })
   
     })
