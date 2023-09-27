@@ -31,16 +31,16 @@ const getCarrito = async (req,res) =>{
     }
   });
   
- res.render('cart',{carritoId ,total,css:'home'})
+ res.render('cart',{carritoId ,total,css:'styles'})
 }
 
 
 const register = (req, res) => {
-  res.render('register', { css: 'home' });
+  res.render('register', { css: 'styles' });
 };
 
 const login = (req, res) => {
-  res.render('login', { css: 'home' });
+  res.render('login', { css: 'styles' });
 };
 
 const profile = (req, res) => {
@@ -48,7 +48,7 @@ const profile = (req, res) => {
 };
 
 const panelAdmin = (req,res) =>{
-  res.render('panelAdmin', { css:'home',  user: req.session.user })
+  res.render('panelAdmin', { css:'styles',  user: req.session.user })
 }
 
 const restoreRequest = (req,res) =>{
@@ -72,7 +72,7 @@ const panelAdminUser = async (req,res)=>{
   const userDTO = users.map( user =>  new TokenDTO(user) ) 
   res.render('panelAdminUser',{
     users:userDTO,
-    css:'home'
+    css:'styles'
   })
 }
 

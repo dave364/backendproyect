@@ -79,17 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
            const responseData = await response.json();
            console.log(responseData);
            Swal.fire('Se agrego el producto al carrito')
-          }
-  
-  
-  
-  
-          
-           
+          }    
       })
-  
   })
   }
+
+  // Agregar el evento click para los botones "Comprar"
+
   
   
   if (botonFinalizar){
