@@ -74,7 +74,7 @@ const initializePassport = () =>{
     passport.use('github',new GithubStrategy({
         clientID:"Iv1.ce7d9857832de97b",
         clientSecret:"1684a195b22265a67821a35b62b4a65499e284e7",
-        callbackURL:"https://deploy-proyectoback.onrender.com/api/sessions/githubcallback"
+        callbackURL:"https://deploy-proyectoback.onrender.com/githubcallback"
     },async(accessToken,refreshToken,profile,done)=>{
         try {
             
@@ -88,7 +88,8 @@ const initializePassport = () =>{
                 const newUser = {
                     first_name:name,
                     email:emailGitHub,
-                    password:''
+                    password:'',
+                    //cart:cart
                 }
                 const result = await userService.createUser(newUser);
                 return done(null,result);
