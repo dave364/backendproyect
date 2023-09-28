@@ -59,7 +59,7 @@ const githubcallback =(req,res)=>{
     }
 
     console.log('Usuario autenticado con Github:', user);
-  res.redirect('/profile');
+  res.redirect('/products');
 }
 
 const current = (req,res)=>{
