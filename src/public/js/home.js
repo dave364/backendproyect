@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td><img class="cartIMG" src=${product.thumbnail} alt="img"></td>
                 <td>${product.price}</td>
                 <td>
-                <button onclick="getProduct(0, ${orderBy}, '${product._id}')"class="comprarProducto"data-product-id="${product._id}">Comprar</button>
+                <button onclick="getProduct(0, ${orderBy}, '${product._id}')"class="comprarProducto pages btn btn-sm btn-info"data-product-id="${product._id}">Comprar</button>
                 </td>
               </tr>
             `;
