@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
           productList.forEach(product => {
             const row = `
               <tr class="comprarProducto">
-                <td>${product._id}</td>
+              
                 <td>${product.title}</td>
                 <td>${product.category}</td>
                 <td>${product.stock}</td>
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${product.price}</td>
                 <td>
                 <button onclick="getProduct(0, ${orderBy}, '${product._id}')"class="comprarProducto pages btn btn-sm btn-info"data-product-id="${product._id}">Comprar</button>
-                </td>
+                 </td>
               </tr>
             `;
             tableBody.innerHTML += row;
@@ -217,13 +217,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(error => {
         console.log('Error al obtener los productos:', error);
       });
-       const idCartUser= document.querySelector('.idCarrito');
+      const idCartUser= document.querySelector('.idCarrito');
       const comprarBotones = document.querySelectorAll('.comprarProducto');
 comprarBotones.forEach((boton) => {
   boton.addEventListener('click', async (e) => {
     e.preventDefault();
     const productId = e.target.getAttribute('data-product-id'); // Obtener el ID del producto desde el atributo de datos
     console.log(`Se hizo clic en Comprar para el producto con ID: ${productId}`);
+
     // Aquí puedes agregar la lógica para comprar el producto con el ID obtenido
     // Por ejemplo, hacer una solicitud para agregar el producto al carrito
     const response = await fetch(`/api/carts/${idCartUser.id}/product/${productId}`, {
@@ -233,22 +234,26 @@ comprarBotones.forEach((boton) => {
         'Content-Type': 'application/json',
       },
     });
+
     const responseData = await response.json();
     console.log(responseData);
+
     if (responseData.status === 'success') {
       Swal.fire('Se agregó el producto al carrito');
     } else {
       Swal.fire('No se pudo agregar el producto al carrito');
     }
+
     // Puedes personalizar la lógica de compra según tus necesidades
   });
 });
-}
+
+  }
   
   
   
   // Llama a la función getProduct inicialmente para mostrar los productos
-  getProduct(0,0);
+  getProduct(0, 0);
   
   function pageButtons(state, orderBy) { console.log("state",state, orderBy)
     var wrapper = document.getElementById('pagination-wrapper');
@@ -275,7 +280,8 @@ comprarBotones.forEach((boton) => {
       getProduct(page, orderBy);
     });
   }
-  function buildTable(state) {
+
+    function buildTable(state) {
     console.log("data", state);
     console.log("payload", state.querySet);
     var table = $('#table-body');
@@ -298,6 +304,6 @@ comprarBotones.forEach((boton) => {
       var noProductsRow = `<tr><td colspan="6">No hay productos disponibles</td></tr>`;
       table.append(noProductsRow);
     }
-    pageButtons(state);
-  }
   
+    pageButtons(state);
+    }
