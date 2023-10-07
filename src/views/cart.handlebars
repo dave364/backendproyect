@@ -18,12 +18,12 @@
       <div class="verCarrito">
        <p><span id={{carritoId._id}} class="keyDer"> ID Carrito:</span>{{carritoId._id}}</p>
       </div>
-      <div class="table table-dark" id="our-table">
+      <div class="table-responsive"></div>
+      <div class="table table-dark-dos" id="our-table">
           <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">Producto</th>
-                <th scope="col">Código de Referencia</th>
                 <th scope="col">imagen</th>
                 <th scope="col">Cantidad</th>
               </tr>
@@ -32,7 +32,7 @@
               {{#each carritoId.products}}
                 <tr>
                   <td>{{this.product.title}}</td>
-                  <td>{{this._id}}</td>
+                
                   <td><img class="cartIMG" src={{this.product.thumbnail}} alt="img"></td>
                   <td>{{this.quantity}}</td>
                   <td class="eliminarProducto">
@@ -41,6 +41,7 @@
               {{/each}}
             </tbody>
           </table>
+      </div>
       </div>
       <p>Total:${{total}} </p>
                        <div class="vaciarCarrito">
@@ -52,6 +53,3 @@
 {{/if}}
 
 <script src="/js/home.js"></script>
-
-
-

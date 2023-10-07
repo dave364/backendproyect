@@ -26,27 +26,29 @@
 {{/unless}}
 <div id="page-content" class="page-content">
  
-  <div class="container ">
-    <div id="verProductsHome">
-   {{#if user}}
-    <div>
-            <h1>Hola, {{user.name}}</h1>
-            <p class="email" email={{user.email}}>Correo: {{user.email}}</p>
-            <p class="userID" id={{user.id}}>ID: {{user.id}} </p>
-            <p>Role: {{user.role}}</p>
-            <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
-            <a href="/api/sessions/logout"><button class="pages btn btn-sm btn-info">Salir</button></a>
-            
+<div class="container">
+  <div id="verProductsHome" class="row">
+    {{#if user}}
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <h1>Hola, {{user.name}}</h1>
+      <p class="email" email={{user.email}}>Correo: {{user.email}}</p>
+      <p class="userID" id={{user.id}}>ID: {{user.id}} </p>
+      <p>Role: {{user.role}}</p>
+      <p id={{user.cart}} class="idCarrito">Carrito: {{user.cart}}</p>
+      <a href="/api/sessions/logout" class="btn btn-sm btn-info">Salir</a>
     </div>
-   {{/if}}
+    {{/if}}
   </div>
+</div>
 
     <!-- Table structure here -->
+    <div class="table-responsive">
     <table class= "table table-dark mostrarProductosCart" id="our-table">
       <thead>
         <tr>
-          <th>Ref</th>
-          <th>Nombre</th>
+        
+          <th style="
+    white-space: nowrap;">Nombre</th>
           <th>Category</th>
           <th>Stock</th>
           <th>Imagen</th>
@@ -56,12 +58,13 @@
       <tbody class= " mostrarProductosCart"  id="table-body">
       </tbody>
     </table>
+    </div>
   
 
                 
          
  
-  <div class="container ">
+  <div class="containerdos ">
     <div id="pagination-wrapper"></div>
   </div>
 </div>

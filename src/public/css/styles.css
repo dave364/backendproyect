@@ -1,7 +1,4 @@
 
-
-
-
 button {
     font-size: 16px;
     text-align: center;
@@ -36,7 +33,7 @@ button {
     transition-duration: 0.4s;
     position: absolute;
     right: 15px;
-    bottom: 15px;
+    bottom: 8px;
 }
 
 .button-checkout2 {
@@ -54,33 +51,121 @@ button {
     color: white;
 }
 
-.page-content {
+/* Estilos para la barra de navegación */
+.page-nav {
+    background-color: #2196F3;
+    color: white;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
-.product-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+.page-nav h1 {
+    margin: 0;
+    font-size: 24px;
 }
 
-.title {
-    font-size: 40px;
-    font-weight: bold;
+.button-checkout {
+    background-color: white;
+    color: #008CBA;
+    border: 2px solid #008CBA;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button-checkout:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+/* Estilos para el formulario de inicio de sesión */
+.text-center {
     text-align: center;
 }
 
-.product-container {
-    border-radius: 20px;
-    margin: 10px;
-    padding: 2px 16px;
-    position: relative;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-    background-color: white;
+.page-nav-login {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
 }
 
+#loginForm label {
+    font-weight: bold;
+}
+
+#loginForm input[type="text"],
+#loginForm input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#loginForm input[type="submit"] {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loginForm input[type="submit"]:hover {
+    background-color: #008CBA;
+}
+
+/* Estilos para la tabla de productos */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table.table-dark-dos {
+
+}
+
+.table.table-dark {
+    background-color: #333;
+    color: white;
+}
+
+.table.table-dark th,
+.table.table-dark td {
+    border: 1px solid #555;
+    white-space: normal !important;
+}
+
+/* Estilos para los botones en la tabla */
+.mostrarProductosCart .btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mostrarProductosCart .btn:hover {
+    background-color: #008CBA;
+}
+
+/* Estilos para la paginación */
+#pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Estilos para el contenedor inferior */
+.containerdos {
+    margin-top: 20px;
+    text-align: center;
+}
+
+ 
 .product-container:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
@@ -98,73 +183,6 @@ button {
     text-align: center;
 }
 
-.button-add {
-    background-color: white;
-    color: black;
-    border: 2px solid #4CAF50; /* Green */
-    transition-duration: 0.4s;
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-}
-  
-.button-add:hover {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
-
-.button-add.disabled {
-    background-color: white;
-    color: black;
-    border: 2px solid #9e9e9e; 
-    transition-duration: 0.4s;
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-}
-  
-.button-add.disabled:hover {
-    background-color: #9e9e9e; 
-    color: white;
-}
-
-.order {
-    min-width: 75%;
-    display: none;
-}
-
-.order-table {
-    width: 100%;
-    text-align: center;
-    font-size: large;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #9e9e9e;
-}
-
-.order-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.order-actions p {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.order-actions p:hover {
-    cursor: pointer;
-}
-
-.order-shipping {
-    font-size: large;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #9e9e9e;
-}
-
-.order-shipping .form-group {
-    padding-bottom: 5px;
-}
 
 input {
     border-radius: 4px;
@@ -175,7 +193,7 @@ input {
     border: 1px solid rgba(0, 0, 0, .11);
     ;
     padding: 10px;
-    width: 500px
+    width: auto !important;
 }
 
 .controls-item {
@@ -188,18 +206,29 @@ input {
 
 .button-volver {
     background-color: white;
-    color: black;
-    border: 2px solid #008CBA; /* Blue */
-    transition-duration: 0.4s;
-    margin-right: 10px; /* Agregamos margen para separar del título */
+    color: #008CBA;
+    border: 2px solid #008CBA;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 5px; /* Agregamos margen para separar del título */
   }
+
+  .button-volver:hover {
+    background-color: #008CBA;
+    color: white;
+}
   
   .button-finalizar {
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA; /* Blue */
-    transition-duration: 0.4s;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
   }
+  .button-finalizar:hover {
+    background-color: #008CBA;
+}
   
 /* Agrega margen y estilo general a los contenedores de formularios */
 .formConteiner,
@@ -346,7 +375,107 @@ input {
     background-color: #e67e22;
 }
 
-.cartIMG{
-    width: 50%;
-    height: 100px;
+.cartIMG {
+    width: 20%;
+    height: 100%;
+}
+
+.eliminarProducto .btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.eliminarProducto .btn:hover {
+    background-color: #008CBA;
+}
+.vaciarCarrito {
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (min-width: 1200px){
+.page-content.container {
+    width: auto;
+}}
+/* Estilos para pantallas medianas */
+@media (max-width: 768px) {
+    .page-nav {
+        background-color: #2196F3;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5px;
+    }
+    
+    .page-nav h1 {
+        margin: 10px; /* Reduzcamos el margen superior para ahorrar espacio vertical */
+    }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 576px) {
+    .page-nav h1 {
+        font-size: 20px; /* Reducir el tamaño de fuente */
+    }
+}
+/* Estilos para pantallas medianas */
+@media (max-width: 768px) {
+    .button-checkout {
+        font-size: 10px; /* Reducir el tamaño de fuente */
+        padding: 8px 12px; /* Reducir el relleno */
+        right: 10px; /* Ajustar la posición */
+        bottom: 10px; /* Ajustar la posición */
+    }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 576px) {
+    .button-checkout {
+        font-size: 12px; /* Reducir aún más el tamaño de fuente */
+        padding: 6px 10px; /* Reducir aún más el relleno */
+        right: 5px; /* Ajustar aún más la posición */
+        bottom: 12px; /* Ajustar aún más la posición */
+    }
+    body {
+       
+        font-size: 10px;
+    }
+    .cartIMG {
+        width: 100%;
+        height: 50px;
+    }
+}
+
+
+
+@media screen and (max-width: 767px){
+.table-responsive>.table {
+    margin-bottom: 0;
+    font-size: 10px; 
+    white-space: normal !important;
+}
+.page-content.table-responsive>.table tbody tr td  {
+    white-space: initial !important;
+}
+}
+
+.table-responsive {
+    overflow-x: auto; /* Agrega una barra de desplazamiento horizontal cuando sea necesario */
+    max-width: 100%; /* La tabla no se extenderá más allá de su contenedor */
+}
+
+.table-responsive.table {
+    display: flex;
+    width: 62%;
+    max-width: 100%;
+    margin-bottom: -10px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 10px;
+    white-space: normal;
 }

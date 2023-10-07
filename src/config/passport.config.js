@@ -88,7 +88,8 @@ const initializePassport = () =>{
                 const newUser = {
                     first_name:name,
                     email:emailGitHub,
-                    password:''
+                    password:'',
+                    cart:cart
                 }
                 const result = await userService.createUser(newUser);
                 return done(null,result);

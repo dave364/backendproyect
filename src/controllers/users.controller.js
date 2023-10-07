@@ -55,11 +55,12 @@ const githubcallback =(req,res)=>{
         id:user.id,
         name:user.first_name,
         role:user.role,
-        email:user.email
+        email:user.email,
+        user:user.cart
     }
 
     console.log('Usuario autenticado con Github:', user);
-  res.redirect('/products');
+  res.redirect('/tienda');
 }
 
 const current = (req,res)=>{

@@ -44,7 +44,7 @@ const login = (req, res) => {
 };
 
 const profile = (req, res) => {
-  res.render('profile', { css:'styles', user: req.session.user });
+  res.render('profile', { user: req.session.user });
 };
 
 const panelAdmin = (req,res) =>{
