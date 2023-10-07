@@ -406,8 +406,12 @@ input {
 /* Estilos para pantallas medianas */
 @media (max-width: 768px) {
     .page-nav {
-        flex-direction: column;
+        background-color: #2196F3;
+        color: white;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        padding: 10px 5px;
     }
     
     .page-nav h1 {
@@ -437,7 +441,7 @@ input {
         font-size: 12px; /* Reducir aún más el tamaño de fuente */
         padding: 6px 10px; /* Reducir aún más el relleno */
         right: 5px; /* Ajustar aún más la posición */
-        bottom: 5px; /* Ajustar aún más la posición */
+        bottom: 12px; /* Ajustar aún más la posición */
     }
     body {
        
